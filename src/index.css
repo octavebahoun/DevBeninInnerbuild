@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+/* =====================================================
+   DESIGN SYSTEM — DevBénin
+   Dark mode = default (:root)
+   Light mode = .light-theme on <body>
+   ===================================================== */
+
+/* ---------- DARK MODE (default) ---------- */
+:root {
+  --bg:            #0A1A0D;
+  --card-bg:       #111F14;
+  --surface:       #182B1C;
+  --text-main:     #E8F5ED;
+  --text-muted:    #6EE7A0;
+  --text-sub:      #9CA3AF;
+  --accent-green:  #22C55E;
+  --accent-orange: #F97316;
+  --border-col:    rgba(34, 197, 94, 0.15);
+  --border-orange: rgba(249, 115, 22, 0.25);
+  --pattern-col:   rgba(34, 197, 94, 0.035);
+  --glow-green:    rgba(34, 197, 94, 0.12);
+  --glow-orange:   rgba(249, 115, 22, 0.12);
+}
+
+/* ---------- LIGHT MODE ---------- */
+.light-theme {
+  --bg:            #F8FAFC;
+  --card-bg:       #FFFFFF;
+  --surface:       #EFF6EE;
+  --text-main:     #0F1F12;
+  --text-muted:    #166534;
+  --text-sub:      #4B5563;
+  --accent-green:  #16A34A;
+  --accent-orange: #EA6C00;
+  --border-col:    rgba(22, 163, 74, 0.2);
+  --border-orange: rgba(234, 108, 0, 0.25);
+  --pattern-col:   rgba(22, 163, 74, 0.04);
+  --glow-green:    rgba(22, 163, 74, 0.08);
+  --glow-orange:   rgba(234, 108, 0, 0.08);
+}
+
+/* ---------- Tailwind v4 @theme (token registration) ---------- */
+@theme {
+  --font-display: "Black Ops One", sans-serif;
+  --font-body:    "Syne", sans-serif;
+
+  /* Colors mapped to CSS variables — NO circular refs */
+  --color-bg:          #0A1A0D;
+  --color-card:        #111F14;
+  --color-surface:     #182B1C;
+  --color-text:        #E8F5ED;
+  --color-muted:       #6EE7A0;
+  --color-sub:         #9CA3AF;
+  --color-accent:      #22C55E;
+  --color-orange:      #F97316;
+  --color-border-g:    rgba(34, 197, 94, 0.15);
+
+  --radius-card:  8px;
+  --radius-btn:   6px;
+}
+
+/* =====================================================
+   BASE
+   ===================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text-main);
+  transition: background-color 300ms ease, color 300ms ease;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Semantic shorthand classes used in components */
+.bg-theme        { background-color: var(--bg); }
+.bg-card-theme   { background-color: var(--card-bg); }
+.bg-surface-theme{ background-color: var(--surface); }
+.text-theme      { color: var(--text-main); }
+.text-muted-theme{ color: var(--text-muted); }
+.text-sub-theme  { color: var(--text-sub); }
+.text-green      { color: var(--accent-green); }
+.text-orange     { color: var(--accent-orange); }
+.border-theme    { border-color: var(--border-col); }
+.border-orange-theme { border-color: var(--border-orange); }
+
+/* =====================================================
+   PATTERNS
+   ===================================================== */
+.pattern-dots {
+  background-image: radial-gradient(var(--pattern-col) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.pattern-circuit {
+  background-image:
+    linear-gradient(var(--pattern-col) 1px, transparent 1px),
+    linear-gradient(90deg, var(--pattern-col) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* =====================================================
+   ORANGE ACCENT UTILITIES
+   ===================================================== */
+.btn-orange {
+  background-color: var(--accent-orange);
+  color: #fff;
+  box-shadow: 0 4px 24px var(--glow-orange);
+  transition: all 200ms ease;
+}
+.btn-orange:hover {
+  filter: brightness(1.1);
+  transform: scale(1.04);
+  box-shadow: 0 6px 32px var(--glow-orange);
+}
+.btn-orange:active { transform: scale(0.97); }
+
+.btn-outline-green {
+  background: transparent;
+  border: 1.5px solid var(--accent-green);
+  color: var(--accent-green);
+  transition: all 200ms ease;
+}
+.btn-outline-green:hover {
+  background: var(--glow-green);
+  transform: scale(1.04);
+}
+
+.btn-outline-orange {
+  background: transparent;
+  border: 1.5px solid var(--accent-orange);
+  color: var(--accent-orange);
+  transition: all 200ms ease;
+}
+.btn-outline-orange:hover {
+  background: var(--glow-orange);
+  transform: scale(1.04);
+}
+
+/* Glow dividers */
+.divider-green  { background: linear-gradient(90deg, transparent, var(--accent-green), transparent); height:1px; }
+.divider-orange { background: linear-gradient(90deg, transparent, var(--accent-orange), transparent); height:1px; }
+
+/* Card base */
+.card-theme {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-col);
+  border-radius: var(--radius-card);
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.card-theme:hover { border-color: var(--accent-green); }
+
+.card-theme-orange:hover { border-color: var(--accent-orange); }
+
+/* Orange badge */
+.badge-orange {
+  background: var(--glow-orange);
+  border: 1px solid var(--border-orange);
+  color: var(--accent-orange);
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+}
+
+.badge-green {
+  background: var(--glow-green);
+  border: 1px solid var(--border-col);
+  color: var(--accent-green);
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+}
+
+/* Section label line */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-orange);
+}
+.section-label::after {
+  content: '';
+  display: block;
+  width: 3rem;
+  height: 1px;
+  background: var(--accent-orange);
+  opacity: 0.5;
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--accent-orange); opacity: 0.4; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { opacity: 0.8; }
