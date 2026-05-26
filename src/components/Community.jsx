@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ScrollReveal, StaggerGroup, StaggerItem } from './ScrollReveal';
 
 export default function Community() {
   const [activeFilter, setActiveFilter] = useState('Tous');
@@ -72,17 +73,19 @@ export default function Community() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div className="section-label">
-              <span>04</span>
-              <span>Annuaire des membres</span>
-            </div>
-            <h2 className="mt-3 font-display text-2xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
-              La Communauté{' '}
-              <span style={{ color: 'var(--accent-orange)' }}>Active</span>
-            </h2>
+            <ScrollReveal variant="fadeLeft" duration={0.5}>
+              <div className="section-label"><span>04</span><span>Annuaire des membres</span></div>
+            </ScrollReveal>
+            <ScrollReveal variant="fadeUp" delay={0.1}>
+              <h2 data-gsap-title className="mt-3 font-display text-2xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
+                La Communauté{' '}
+                <span style={{ color: 'var(--accent-orange)' }}>Active</span>
+              </h2>
+            </ScrollReveal>
           </div>
 
           {/* Search bar */}
+          <ScrollReveal variant="fadeRight" delay={0.15}>
           <div className="relative w-full max-w-xs">
             <input
               type="text"
@@ -98,6 +101,7 @@ export default function Community() {
             />
             <Search className="absolute left-3 top-2.5 h-3.5 w-3.5" style={{ color: 'var(--text-muted)' }} />
           </div>
+          </ScrollReveal>
         </div>
 
         {/* Filters */}

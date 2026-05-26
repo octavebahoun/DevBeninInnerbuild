@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { Menu, X, Sun, Moon, Search, ChevronDown, Users, BookOpen, Trophy, Code2, BarChart2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 
 /* ──────────────────────────────────────────────────────────
    Search data
@@ -49,6 +50,13 @@ const NAV_LINKS = [
 ══════════════════════════════════════════════════════════ */
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+
+  const getHref = (hash) => {
+    if (!hash) return '#';
+    if (hash.startsWith('/')) return hash;
+    return location.pathname === '/' ? hash : '/' + hash;
+  };
 
   const [scrolled,        setScrolled]        = useState(false);
   const [isOpen,          setIsOpen]          = useState(false);
@@ -84,9 +92,13 @@ export default function Navbar() {
     else setSearchQuery('');
   }, [searchOpen]);
 
-  /* derived states */
-  const showFullNav      = !scrolled || (isOpen && isDesktop);
-  const showMobileMenu   = scrolled && isOpen && !isDesktop;
+  /* ─── Derived states ───────────────────────────────────────
+     Mobile  : ALWAYS pill → dropdown on burger open
+     Desktop : full navbar at top, pill after scroll,
+               pill expands back to full when burger opened
+  ─────────────────────────────────────────────────────────── */
+  const showFullNav    = isDesktop && (!scrolled || isOpen);   // desktop only
+  const showMobileMenu = !isDesktop && isOpen;                 // mobile dropdown
 
   const filteredSearch = searchQuery.length > 0
     ? SEARCH_DATA.filter(i => i.label.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -240,10 +252,10 @@ export default function Navbar() {
                   className="flex h-14 items-center justify-between px-5 gap-3 whitespace-nowrap"
                 >
                   {/* Logo */}
-                  <a href="#home" className="font-display text-lg tracking-wider flex-shrink-0"
+                  <Link to="/" className="font-display text-lg tracking-wider flex-shrink-0"
                     style={{ color: 'var(--text-main)' }}>
                     Dev<span style={{ color: 'var(--accent-orange)' }}>Bénin</span>
-                  </a>
+                  </Link>
 
                   {/* Nav links — desktop */}
                   <nav className="hidden md:flex items-center gap-1 flex-1 justify-center">
@@ -252,7 +264,7 @@ export default function Navbar() {
                         onMouseEnter={() => link.children && setActiveDropdown(link.label)}
                         onMouseLeave={() => setActiveDropdown(null)}
                       >
-                        <a href={link.href || '#'}
+                        <a href={getHref(link.href)}
                           className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider transition-all duration-150"
                           style={{ color: 'var(--text-muted)' }}
                           onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-orange)'; e.currentTarget.style.background = 'var(--glow-orange)'; }}
@@ -288,18 +300,18 @@ export default function Navbar() {
                     </button>
 
                     {/* Connexion — desktop */}
-                    <button className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                    <Link to="/login" className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
                       style={{ color: 'var(--text-muted)' }}
                       onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
                       onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
                     >
                       Connexion
-                    </button>
+                    </Link>
 
                     {/* CTA — desktop */}
-                    <button className="hidden md:block btn-orange rounded-lg px-4 py-1.5 font-display text-[11px] tracking-wider">
+                    <Link to="/register" className="hidden md:block btn-orange rounded-lg px-4 py-1.5 font-display text-[11px] tracking-wider text-center">
                       Rejoindre ↗
-                    </button>
+                    </Link>
 
                     {/* Burger — mobile */}
                     <button onClick={handleBurger}
@@ -319,10 +331,10 @@ export default function Navbar() {
                   transition={{ duration: 0.15 }}
                   className="flex h-11 items-center justify-center gap-3 px-5"
                 >
-                  <a href="#home" className="font-display text-sm tracking-wider"
+                  <Link to="/" className="font-display text-sm tracking-wider"
                     style={{ color: 'var(--text-main)' }}>
                     Dev<span style={{ color: 'var(--accent-orange)' }}>Bénin</span>
-                  </a>
+                  </Link>
                   <span className="h-3.5 w-[1px]" style={{ background: 'var(--border-col)' }} />
                   <button onClick={handleBurger} aria-label="Menu">
                     <BurgerLines />
@@ -354,7 +366,7 @@ export default function Navbar() {
                   {NAV_LINKS.map(link => (
                     <div key={link.label}>
                       {!link.children ? (
-                        <a href={link.href} onClick={closeAll}
+                        <a href={getHref(link.href)} onClick={closeAll}
                           className="flex items-center px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-all duration-150"
                           style={{ color: 'var(--text-muted)' }}
                           onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
@@ -369,7 +381,7 @@ export default function Navbar() {
                             {link.label}
                           </div>
                           {link.children.map(child => (
-                            <a key={child.label} href={child.href} onClick={closeAll}
+                            <a key={child.label} href={getHref(child.href)} onClick={closeAll}
                               className="flex items-center gap-2.5 px-6 py-2 text-xs font-medium transition-all duration-150"
                               style={{ color: 'var(--text-sub)' }}
                               onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-orange)'; e.currentTarget.style.background = 'var(--glow-orange)'; }}
@@ -402,13 +414,13 @@ export default function Navbar() {
                         Rechercher…
                       </button>
                     </div>
-                    <button className="w-full rounded-lg py-2 text-xs font-bold uppercase tracking-wider text-center mb-2 transition-all duration-200"
+                    <Link to="/login" onClick={closeAll} className="block w-full rounded-lg py-2 text-xs font-bold uppercase tracking-wider text-center mb-2 transition-all duration-200"
                       style={{ border: '1px solid var(--border-col)', color: 'var(--text-muted)' }}>
                       Connexion
-                    </button>
-                    <button className="btn-orange w-full rounded-lg py-2 font-display text-xs tracking-wider text-center">
+                    </Link>
+                    <Link to="/register" onClick={closeAll} className="block btn-orange w-full rounded-lg py-2 font-display text-xs tracking-wider text-center">
                       Rejoindre ↗
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
