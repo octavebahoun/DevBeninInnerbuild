@@ -1,81 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Heart, MessageSquare, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollReveal } from './ScrollReveal';
+import { articleStore } from '../lib/articleStore';
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState('Tous');
-
-  const initialArticles = [
-    {
-      id: 'azure-react-2025',
-      title: "Déployer une app React sur Azure en 2025",
-      preview: "Un guide étape par étape pour héberger vos applications React de manière sécurisée et évolutive sur Azure App Services.",
-      author: "Oktav Dev",
-      date: "18 mai 2026",
-      readTime: "5 min",
-      tags: ["Tuto", "React"],
-      comments: 8,
-      likes: 42,
-      category: "React"
-    },
-    {
-      id: 'django-postgres-docker',
-      title: "Optimiser Django et PostgreSQL avec Docker",
-      preview: "Apprenez à orchestrer votre base de données et votre backend Django pour un environnement de développement local ultra-rapide.",
-      author: "Amina Bello",
-      date: "15 mai 2026",
-      readTime: "8 min",
-      tags: ["Python", "Docker"],
-      comments: 5,
-      likes: 31,
-      category: "Python"
-    },
-    {
-      id: 'gsap-interactive-scroll',
-      title: "Dompter GSAP ScrollTrigger pour des sites vivants",
-      preview: "Créez des animations fluides au défilement en évitant les surcharges CPU. Astuces de performance indispensables.",
-      author: "Ronald Hounnou",
-      date: "10 mai 2026",
-      readTime: "6 min",
-      tags: ["Tuto", "GSAP"],
-      comments: 12,
-      likes: 56,
-      category: "GSAP"
-    }
-  ];
-
-  const [articles, setArticles] = useState(initialArticles);
+  const [articles, setArticles] = useState([]);
   const [likedArticles, setLikedArticles] = useState({});
 
   useEffect(() => {
-    const savedLikes = localStorage.getItem('devbenin-blog-likes');
-    if (savedLikes) {
-      try { setLikedArticles(JSON.parse(savedLikes)); } catch (e) { console.error(e); }
-    }
-    const savedCounts = localStorage.getItem('devbenin-blog-counts');
-    if (savedCounts) {
-      try { setArticles(JSON.parse(savedCounts)); } catch (e) { console.error(e); }
-    }
+    setArticles(articleStore.getArticles());
+    setLikedArticles(articleStore.getLikesMap());
   }, []);
 
   const handleLike = (articleId) => {
-    const isAlreadyLiked = likedArticles[articleId];
-    const newLiked = { ...likedArticles, [articleId]: !isAlreadyLiked };
-    setLikedArticles(newLiked);
-    localStorage.setItem('devbenin-blog-likes', JSON.stringify(newLiked));
-
-    const updatedArticles = articles.map(art => {
-      if (art.id === articleId) {
-        return { ...art, likes: isAlreadyLiked ? art.likes - 1 : art.likes + 1 };
-      }
-      return art;
-    });
-    setArticles(updatedArticles);
-    localStorage.setItem('devbenin-blog-counts', JSON.stringify(updatedArticles));
+    const result = articleStore.toggleLike(articleId);
+    setArticles(result.articles);
+    setLikedArticles(result.likesMap);
   };
 
-  const categories = ['Tous', 'React', 'Python', 'GSAP'];
+  const categories = useMemo(() => {
+    const unique = new Set(articles.map((article) => article.category));
+    return ['Tous', ...Array.from(unique)];
+  }, [articles]);
   const filteredArticles = activeCategory === 'Tous'
     ? articles
     : articles.filter(art => art.category === activeCategory);

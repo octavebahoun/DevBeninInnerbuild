@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DevBénin — Brandboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #22C55E;
+    --green-dark: #15803D;
+    --green-light: #86EFAC;
+    --green-pale: #DCFCE7;
+    --orange: #F97316;
+    --orange-pale: #FFF7ED;
+    --bg-dark: #0D1B0F;
+    --bg-sidebar: #111C13;
+    --card-dark: #16201A;
+    --border-dark: rgba(34,197,94,0.1);
+    --bg-light: #F0FDF4;
+    --bg-light-card: #FFFFFF;
+    --border-light: #BBF7D0;
+    --text-light: #111827;
+    --text-muted: #6B7280;
+    --radius-card: 8px;
+    --radius-btn: 6px;
+    --base: 4px;
+  }
+
+  body {
+    background: #0D1B0F;
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    padding: 48px 32px;
+    max-width: 1024px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .brand-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 0.5px solid var(--border-dark);
+  }
+  .brand-logo {
+    width: 48px; height: 48px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .brand-name {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 28px;
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+  .brand-name span { color: var(--green); }
+  .brand-tag {
+    font-size: 11px;
+    color: #86EFAC;
+    font-family: 'Syne', monospace;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .doc-badge {
+    margin-left: auto;
+    background: var(--card-dark);
+    border: 0.5px solid var(--border-dark);
+    border-radius: var(--radius-btn);
+    padding: 6px 14px;
+    font-size: 11px;
+    color: var(--green-light);
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 48px;
+  }
+  .section-title {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border-dark);
+  }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
+  /* CARD */
+  .card {
+    background: var(--card-dark);
+    border: 0.5px solid var(--border-dark);
+    border-radius: var(--radius-card);
+    padding: 20px;
+  }
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 8px;
+  }
+  .card-value {
+    font-size: 13px;
+    color: #E2F5EA;
+    line-height: 1.6;
+  }
+
+  /* PALETTE */
+  .swatch-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .swatch {
+    display: flex; flex-direction: column; gap: 8px;
+    align-items: flex-start;
+  }
+  .swatch-color {
+    width: 80px; height: 80px;
+    border-radius: var(--radius-card);
+    border: 0.5px solid rgba(255,255,255,0.07);
+    display: flex; align-items: flex-end; padding: 6px;
+  }
+  .swatch-hex {
+    font-size: 10px;
+    font-family: monospace;
+    opacity: 0.7;
+  }
+  .swatch-name { font-size: 11px; color: #86EFAC; }
+  .swatch-role { font-size: 10px; color: var(--text-muted); max-width: 80px; }
+
+  /* DARK/LIGHT PREVIEW */
+  .mode-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: var(--radius-card); overflow: hidden; border: 0.5px solid var(--border-dark); }
+  .mode-dark { background: #0D1B0F; padding: 20px; }
+  .mode-light { background: #F0FDF4; padding: 20px; }
+  .mode-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
+  .mode-dark .mode-label { color: var(--green-light); }
+  .mode-light .mode-label { color: var(--green-dark); }
+  .mini-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .mini-logo { font-family: 'Black Ops One', sans-serif; font-size: 11px; }
+  .mode-dark .mini-logo { color: #fff; }
+  .mode-light .mini-logo { color: #111; }
+  .mini-btn { font-size: 9px; padding: 4px 10px; border-radius: 4px; font-family: 'Syne', sans-serif; }
+  .mode-dark .mini-btn { background: var(--orange); color: #fff; }
+  .mode-light .mini-btn { background: var(--orange); color: #fff; }
+  .mini-h1 { font-family: 'Black Ops One', sans-serif; font-size: 13px; margin-bottom: 4px; line-height: 1.3; }
+  .mode-dark .mini-h1 { color: #fff; }
+  .mode-light .mini-h1 { color: #111; }
+  .mini-sub { font-size: 10px; margin-bottom: 8px; }
+  .mode-dark .mini-sub { color: var(--green); }
+  .mode-light .mini-sub { color: var(--green-dark); }
+  .mini-cta { font-size: 9px; padding: 5px 12px; border-radius: 4px; display: inline-block; font-family: 'Syne', sans-serif; }
+  .mode-dark .mini-cta { background: var(--green); color: #0D1B0F; font-weight: 600; }
+  .mode-light .mini-cta { background: var(--green-dark); color: #fff; font-weight: 600; }
+
+  /* TYPO */
+  .typo-display {
+    font-family: 'Black Ops One', sans-serif;
+    font-size: 36px;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .typo-display span { color: var(--green); }
+  .typo-body { font-family: 'Syne', sans-serif; font-size: 14px; color: #86EFAC; line-height: 1.7; }
+  .typo-scale { display: flex; flex-direction: column; gap: 8px; }
+  .typo-row { display: flex; align-items: baseline; gap: 16px; padding: 8px 0; border-bottom: 0.5px solid var(--border-dark); }
+  .typo-tag { font-size: 10px; color: var(--text-muted); min-width: 80px; font-family: monospace; }
+  .typo-sample-ops { font-family: 'Black Ops One', sans-serif; color: #fff; }
+  .typo-sample-syne { font-family: 'Syne', sans-serif; color: #86EFAC; }
+
+  /* COMPONENTS */
+  .comp-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn-primary { background: var(--green); color: #0D1B0F; font-family: 'Black Ops One', sans-serif; font-size: 13px; padding: 12px 24px; border-radius: var(--radius-btn); border: none; cursor: pointer; letter-spacing: 0.05em; }
+  .btn-secondary { background: transparent; color: var(--orange); font-family: 'Syne', sans-serif; font-size: 13px; padding: 11px 23px; border-radius: var(--radius-btn); border: 0.5px solid var(--orange); cursor: pointer; }
+  .btn-ghost { background: transparent; color: #86EFAC; font-family: 'Syne', sans-serif; font-size: 13px; padding: 11px 23px; border-radius: var(--radius-btn); border: 0.5px solid var(--border-dark); cursor: pointer; }
+  .badge { font-size: 10px; padding: 3px 10px; border-radius: 20px; font-family: 'Syne', sans-serif; letter-spacing: 0.05em; }
+  .badge-green { background: #14532D; color: var(--green); }
+  .badge-orange { background: #431407; color: var(--orange); }
+
+  /* MOTIFS */
+  .motif-card { position: relative; overflow: hidden; min-height: 120px; }
+  .motif-label { position: relative; z-index: 2; }
+  .dots-pattern {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(34,197,94,0.25) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .circuit-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(34,197,94,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,197,94,0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .neuron-demo {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ANIMATIONS */
+  .anim-row { display: flex; flex-direction: column; gap: 8px; }
+  .anim-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--card-dark); border-radius: var(--radius-btn); border: 0.5px solid var(--border-dark); }
+  .anim-zone { font-size: 11px; color: var(--green-light); min-width: 100px; }
+  .anim-type { font-size: 11px; color: #E2F5EA; flex: 1; }
+  .anim-tool { font-size: 10px; font-family: monospace; color: var(--orange); background: #1C0D00; padding: 2px 8px; border-radius: 4px; }
+
+  /* LAYOUT */
+  .layout-row { display: flex; flex-wrap: wrap; gap: 12px; }
+  .layout-item { background: var(--card-dark); border: 0.5px solid var(--border-dark); border-radius: var(--radius-btn); padding: 12px 16px; }
+  .layout-key { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; font-family: monospace; }
+  .layout-val { font-size: 13px; color: var(--green-light); font-family: monospace; }
+
+  /* ICONS */
+  .icon-note { display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--card-dark); border-radius: var(--radius-btn); border: 0.5px solid var(--border-dark); }
+  .icon-badge { background: #14532D; color: var(--green); font-size: 11px; padding: 4px 10px; border-radius: 4px; font-family: monospace; }
+
+  /* ILLUSTRATIONS */
+  .illus-row { display: flex; flex-direction: column; gap: 8px; }
+  .illus-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: var(--card-dark); border-radius: var(--radius-btn); border: 0.5px solid var(--border-dark); }
+  .illus-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+  .illus-text { font-size: 12px; color: #E2F5EA; line-height: 1.5; }
+  .illus-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  /* FOOTER DOC */
+  .doc-footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 0.5px solid var(--border-dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .doc-footer span { color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="brand-header">
+  <div class="brand-logo">🌿</div>
+  <div>
+    <div class="brand-name">Dev<span>Bénin</span></div>
+    <div class="brand-tag">→ Brandboard v1.0 — InnerBuild S02</div>
+  </div>
+  <div class="doc-badge">Charte graphique</div>
+</div>
+
+<!-- 1. PALETTE -->
+<div class="section">
+  <div class="section-title">01 — Palette de couleurs</div>
+
+  <div class="swatch-row" style="margin-bottom:24px">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#0D1B0F"><span class="swatch-hex" style="color:#86EFAC">#0D1B0F</span></div>
+      <div class="swatch-name">Fond principal</div>
+      <div class="swatch-role">Vert forêt profond — 90% du site dark</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#22C55E"><span class="swatch-hex" style="color:#0D1B0F">#22C55E</span></div>
+      <div class="swatch-name">Vert dominant</div>
+      <div class="swatch-role">Éléments principaux, titres accent, liens</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F97316"><span class="swatch-hex" style="color:#fff">#F97316</span></div>
+      <div class="swatch-name">Orange CTA</div>
+      <div class="swatch-role">Uniquement sur CTA et actions principales</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#86EFAC"><span class="swatch-hex" style="color:#0D1B0F">#86EFAC</span></div>
+      <div class="swatch-name">Vert clair</div>
+      <div class="swatch-role">Sous-titres, textes secondaires dark</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F0FDF4"><span class="swatch-hex" style="color:#15803D">#F0FDF4</span></div>
+      <div class="swatch-name">Fond light</div>
+      <div class="swatch-role">Fond principal mode clair</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#16201A"><span class="swatch-hex" style="color:#86EFAC">#16201A</span></div>
+      <div class="swatch-name">Cards dark</div>
+      <div class="swatch-role">Fond des cartes en mode sombre</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div class="card-label">Règle d'usage des couleurs</div>
+    <div class="card-value">
+      Vert <code>#22C55E</code> → dominant (70%) · Orange <code>#F97316</code> → CTA uniquement (10%) · Fond + cartes → neutre (20%)<br/>
+      <span style="color:var(--orange);font-size:11px">⚠ Ne jamais alterner orange et vert de manière égale — vert domine toujours.</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. DARK / LIGHT PREVIEW -->
+<div class="section">
+  <div class="section-title">02 — Toggle Dark / Light</div>
+  <div class="mode-split">
+    <div class="mode-dark">
+      <div class="mode-label">Mode sombre (défaut)</div>
+      <div class="mini-nav">
+        <span class="mini-logo">DevBénin</span>
+        <span class="mini-btn">Rejoindre</span>
+      </div>
+      <div class="mini-h1">Construisons<br/>l'avenir tech</div>
+      <div class="mini-sub">Communauté des devs béninois</div>
+      <span class="mini-cta">Rejoindre l'élite ↗</span>
+    </div>
+    <div class="mode-light">
+      <div class="mode-label" >Mode clair</div>
+      <div class="mini-nav">
+        <span class="mini-logo" style="color:#111">DevBénin</span>
+        <span class="mini-btn">Rejoindre</span>
+      </div>
+      <div class="mini-h1">Construisons<br/>l'avenir tech</div>
+      <div class="mini-sub">Communauté des devs béninois</div>
+      <span class="mini-cta">Rejoindre l'élite ↗</span>
+    </div>
+  </div>
+</div>
+
+<!-- 3. TYPOGRAPHIE -->
+<div class="section">
+  <div class="section-title">03 — Typographie</div>
+  <div class="grid-2" style="margin-bottom:20px">
+    <div class="card">
+      <div class="card-label">Police Display — Titres / Hero / CTA</div>
+      <div style="font-family:'Black Ops One',sans-serif;font-size:28px;color:#fff;margin:12px 0 4px">Black Ops One</div>
+      <div style="font-size:11px;color:var(--text-muted)">Google Fonts · impact, communauté, identité forte</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Police Body — Navigation / Textes / UI</div>
+      <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:500;color:#86EFAC;margin:12px 0 4px">Syne Regular</div>
+      <div style="font-size:11px;color:var(--text-muted)">Google Fonts · moderne, géométrique, très lisible</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Échelle typographique</div>
+    <div class="typo-scale" style="margin-top:12px">
+      <div class="typo-row">
+        <span class="typo-tag">H1 · 48px</span>
+        <span class="typo-sample-ops" style="font-size:28px;color:#fff">Construisons l'avenir</span>
+      </div>
+      <div class="typo-row">
+        <span class="typo-tag">H2 · 32px</span>
+        <span class="typo-sample-ops" style="font-size:20px;color:#fff">Nos Membres</span>
+      </div>
+      <div class="typo-row">
+        <span class="typo-tag">H3 · 24px</span>
+        <span class="typo-sample-ops" style="font-size:16px;color:#fff">Projets Open Source</span>
+      </div>
+      <div class="typo-row">
+        <span class="typo-tag">Body · 16px</span>
+        <span class="typo-sample-syne" style="font-size:14px">La plus grande communauté de développeurs au Bénin.</span>
+      </div>
+      <div class="typo-row">
+        <span class="typo-tag">Small · 12px</span>
+        <span class="typo-sample-syne" style="font-size:12px;color:var(--text-muted)">Étiquettes, badges, méta-informations</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. COMPOSANTS UI -->
+<div class="section">
+  <div class="section-title">04 — Composants UI</div>
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-label">Boutons</div>
+    <div class="comp-row" style="margin-top:12px">
+      <button class="btn-primary">Rejoindre l'élite ↗</button>
+      <button class="btn-secondary">Voir les projets →</button>
+      <button class="btn-ghost">Se connecter</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Badges & Tags</div>
+    <div class="comp-row" style="margin-top:12px">
+      <span class="badge badge-green">Communauté</span>
+      <span class="badge badge-green">Open Source</span>
+      <span class="badge badge-orange">Challenge actif</span>
+      <span class="badge badge-orange">CTA</span>
+    </div>
+  </div>
+</div>
+
+<!-- 5. NAVBAR -->
+<div class="section">
+  <div class="section-title">05 — Navbar</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-label">Structure</div>
+      <div class="card-value">
+        Accueil · Communauté (Membres, Projets, Blog) · Ressources (Challenges, Classement) · Recherche · Toggle · Se connecter · CTA Rejoindre
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Comportement sticky</div>
+      <div class="card-value">
+        <strong style="color:#86EFAC">Mobile</strong> → Burger centré + logo → dropdown centré<br/>
+        <strong style="color:#86EFAC">Desktop</strong> → Burger centré → s'élargit horizontalement en navbar complète
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. MOTIFS GRAPHIQUES -->
+<div class="section">
+  <div class="section-title">06 — Motifs & Éléments graphiques</div>
+  <div class="grid-3">
+    <div class="card motif-card">
+      <div class="dots-pattern"></div>
+      <div class="motif-label">
+        <div class="card-label">Dot Grid</div>
+        <div class="card-value">Sections communautaires<br/><span style="font-size:10px;color:var(--text-muted)">#22C55E · 4% opacité · statique</span></div>
+      </div>
+    </div>
+    <div class="card motif-card">
+      <div class="circuit-pattern"></div>
+      <div class="motif-label">
+        <div class="card-label">Circuit organique</div>
+        <div class="card-value">Footer uniquement<br/><span style="font-size:10px;color:var(--text-muted)">#22C55E · 5% opacité · inspiré logo</span></div>
+      </div>
+    </div>
+    <div class="card motif-card" style="min-height:120px">
+      <div class="neuron-demo">
+        <svg width="90" height="70" viewBox="0 0 90 70" fill="none">
+          <circle cx="45" cy="35" r="5" fill="#22C55E" opacity="0.9"/>
+          <circle cx="15" cy="15" r="3" fill="#22C55E" opacity="0.5"/>
+          <circle cx="75" cy="15" r="3" fill="#22C55E" opacity="0.5"/>
+          <circle cx="15" cy="55" r="3" fill="#22C55E" opacity="0.5"/>
+          <circle cx="75" cy="55" r="3" fill="#22C55E" opacity="0.5"/>
+          <circle cx="45" cy="5" r="2.5" fill="#22C55E" opacity="0.4"/>
+          <circle cx="45" cy="65" r="2.5" fill="#22C55E" opacity="0.4"/>
+          <line x1="45" y1="35" x2="15" y2="15" stroke="#22C55E" stroke-width="0.7" opacity="0.4"/>
+          <line x1="45" y1="35" x2="75" y2="15" stroke="#22C55E" stroke-width="0.7" opacity="0.4"/>
+          <line x1="45" y1="35" x2="15" y2="55" stroke="#22C55E" stroke-width="0.7" opacity="0.4"/>
+          <line x1="45" y1="35" x2="75" y2="55" stroke="#22C55E" stroke-width="0.7" opacity="0.4"/>
+          <line x1="45" y1="35" x2="45" y2="5" stroke="#22C55E" stroke-width="0.7" opacity="0.3"/>
+          <line x1="45" y1="35" x2="45" y2="65" stroke="#22C55E" stroke-width="0.7" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="motif-label">
+        <div class="card-label">Neurones</div>
+        <div class="card-value">Hero — carte du Bénin<br/><span style="font-size:10px;color:var(--text-muted)">Interactif · Three.js / Canvas</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. ANIMATIONS -->
+<div class="section">
+  <div class="section-title">07 — Animations</div>
+  <div class="anim-row">
+    <div class="anim-item">
+      <span class="anim-zone">Navbar</span>
+      <span class="anim-type">Burger → élargissement horizontal (desktop) / dropdown centré (mobile)</span>
+      <span class="anim-tool">GSAP</span>
+    </div>
+    <div class="anim-item">
+      <span class="anim-zone">Hero · Titre</span>
+      <span class="anim-type">Reveal-left à l'entrée de page</span>
+      <span class="anim-tool">GSAP</span>
+    </div>
+    <div class="anim-item">
+      <span class="anim-zone">Hero · CTA</span>
+      <span class="anim-type">Reveal-left + pulse en boucle</span>
+      <span class="anim-tool">GSAP</span>
+    </div>
+    <div class="anim-item">
+      <span class="anim-zone">Hero · Carte</span>
+      <span class="anim-type">Neurones interactifs (hover/scroll)</span>
+      <span class="anim-tool">Three.js</span>
+    </div>
+    <div class="anim-item">
+      <span class="anim-zone">Sections</span>
+      <span class="anim-type">Scroll reveal-left / reveal-right alternés</span>
+      <span class="anim-tool">GSAP ScrollTrigger</span>
+    </div>
+  </div>
+</div>
+
+<!-- 8. ILLUSTRATIONS & PHOTOS -->
+<div class="section">
+  <div class="section-title">08 — Illustrations & Photos</div>
+  <div class="illus-row">
+    <div class="illus-item">
+      <div class="illus-dot" style="background:var(--green)"></div>
+      <div>
+        <div class="illus-text">Profils membres → photo réelle uploadée par le développeur</div>
+        <div class="illus-sub">Fallback : initiales dans un cercle vert si pas de photo</div>
+      </div>
+    </div>
+    <div class="illus-item">
+      <div class="illus-dot" style="background:var(--green)"></div>
+      <div>
+        <div class="illus-text">Projets → mockup / screenshot du projet</div>
+        <div class="illus-sub">Format 16:9 recommandé</div>
+      </div>
+    </div>
+    <div class="illus-item">
+      <div class="illus-dot" style="background:var(--orange)"></div>
+      <div>
+        <div class="illus-text">Articles blog → illustration vectorielle minimaliste</div>
+        <div class="illus-sub">Style tech, palette verte/sombre, générée par IA ou illustrée — jamais de photos réelles</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 9. ICONOGRAPHIE -->
+<div class="section">
+  <div class="section-title">09 — Iconographie</div>
+  <div class="icon-note">
+    <span class="icon-badge">Lucide Icons</span>
+    <span style="font-size:12px;color:#E2F5EA">Style outline · cohérent avec Syne · open source · léger</span>
+  </div>
+</div>
+
+<!-- 10. LAYOUT & ESPACEMENTS -->
+<div class="section">
+  <div class="section-title">10 — Layout & Espacements</div>
+  <div class="layout-row">
+    <div class="layout-item">
+      <div class="layout-key">base-unit</div>
+      <div class="layout-val">4px</div>
+    </div>
+    <div class="layout-item">
+      <div class="layout-key">max-width</div>
+      <div class="layout-val">1024px</div>
+    </div>
+    <div class="layout-item">
+      <div class="layout-key">section-padding</div>
+      <div class="layout-val">48px vertical</div>
+    </div>
+    <div class="layout-item">
+      <div class="layout-key">radius-card</div>
+      <div class="layout-val">8px</div>
+    </div>
+    <div class="layout-item">
+      <div class="layout-key">radius-btn</div>
+      <div class="layout-val">6px</div>
+    </div>
+    <div class="layout-item">
+      <div class="layout-key">grid-gap</div>
+      <div class="layout-val">16px</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER DOC -->
+<div class="doc-footer">
+  <span>DevBénin · Brandboard v1.0</span>
+  <span>InnerBuild S02 · Phase 2 · <span>Excellence Team</span></span>
+  <span>Mai 2026</span>
+</div>
+
+</body>
+</html>

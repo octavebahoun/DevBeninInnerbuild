@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { Menu, X, Sun, Moon, Search, ChevronDown, Users, BookOpen, Trophy, Code2, BarChart2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { authStore } from '../lib/storage';
 
 /* ──────────────────────────────────────────────────────────
    Search data
@@ -15,9 +16,9 @@ const SEARCH_DATA = [
   { type: 'dev', label: 'Precieux Dev — Frontend · Web3', href: '#community' },
   { type: 'dev', label: 'Ronald Hounnou — UI/UX · Creative Dev', href: '#community' },
   { type: 'dev', label: 'Amina Bello — Backend · Python', href: '#community' },
-  { type: 'project', label: 'DevBénin Platform — Open Source', href: '#' },
-  { type: 'project', label: 'TontineChain — Web3 DeFi', href: '#' },
-  { type: 'project', label: 'CodeToVecto — AI Dev Tools', href: '#' },
+  { type: 'project', label: 'DevBenin Platform — Open Source', href: '/projects/devbenin-platform' },
+  { type: 'project', label: 'TontineChain — Web3 DeFi', href: '/projects/tontinechain' },
+  { type: 'project', label: 'CodeToVecto — AI Dev Tools', href: '/projects/codetovecto' },
 ];
 
 const TYPE_LABEL  = { article: '📝 Derniers articles', dev: '👤 Devs actifs', project: '🚀 Projets populaires' };
@@ -32,8 +33,8 @@ const NAV_LINKS = [
     label: 'Communauté',
     children: [
       { label: 'Membres',  href: '#community', icon: <Users    className="h-3.5 w-3.5" /> },
-      { label: 'Projets',  href: '#projects',  icon: <Code2    className="h-3.5 w-3.5" /> },
-      { label: 'Blog',     href: '#blog',      icon: <BookOpen className="h-3.5 w-3.5" /> },
+      { label: 'Projets',  href: '/projects',  icon: <Code2    className="h-3.5 w-3.5" /> },
+      { label: 'Articles', href: '/articles', icon: <BookOpen className="h-3.5 w-3.5" /> },
     ],
   },
   {
@@ -51,6 +52,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const getHref = (hash) => {
     if (!hash) return '#';
@@ -60,6 +62,7 @@ export default function Navbar() {
 
   const [scrolled,        setScrolled]        = useState(false);
   const [isOpen,          setIsOpen]          = useState(false);
+  const [session,         setSession]         = useState(() => authStore.getSession());
   const [windowWidth,     setWindowWidth]     = useState(
     typeof window !== 'undefined' ? window.innerWidth : 1200
   );
@@ -67,6 +70,7 @@ export default function Navbar() {
   const [searchOpen,      setSearchOpen]      = useState(false);
   const [searchQuery,     setSearchQuery]     = useState('');
   const searchRef = useRef(null);
+  const closeTimeout = useRef(null);
 
   const isDesktop = windowWidth >= 768;
 
@@ -92,6 +96,21 @@ export default function Navbar() {
     else setSearchQuery('');
   }, [searchOpen]);
 
+  /* session tracking */
+  useEffect(() => {
+    setSession(authStore.getSession());
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const onStorage = (event) => {
+      if (event.key === 'devbenin-session') {
+        setSession(authStore.getSession());
+      }
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
+
   /* ─── Derived states ───────────────────────────────────────
      Mobile  : ALWAYS pill → dropdown on burger open
      Desktop : full navbar at top, pill after scroll,
@@ -106,6 +125,44 @@ export default function Navbar() {
 
   const handleBurger = () => { setIsOpen(p => !p); setActiveDropdown(null); };
   const closeAll     = () => { setIsOpen(false); setActiveDropdown(null); };
+    const openDropdown = (label) => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+        closeTimeout.current = null;
+      }
+      setActiveDropdown(label);
+    };
+
+    const scheduleCloseDropdown = () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+      }
+      closeTimeout.current = setTimeout(() => {
+        setActiveDropdown(null);
+        closeTimeout.current = null;
+      }, 140);
+    };
+
+    const cancelCloseDropdown = () => {
+      if (closeTimeout.current) {
+        clearTimeout(closeTimeout.current);
+        closeTimeout.current = null;
+      }
+    };
+
+    useEffect(() => {
+      return () => {
+        if (closeTimeout.current) {
+          clearTimeout(closeTimeout.current);
+        }
+      };
+    }, []);
+  const handleLogout = () => {
+    authStore.clearSession();
+    setSession(null);
+    closeAll();
+    navigate('/');
+  };
 
   /* ── burger lines (animated) ── */
   const BurgerLines = () => (
@@ -135,13 +192,12 @@ export default function Navbar() {
           transition={{ duration: 0.15 }}
           className="absolute top-full left-0 mt-1.5 w-44 rounded-xl overflow-hidden shadow-2xl z-50"
           style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-col)' }}
+          onMouseEnter={cancelCloseDropdown}
+          onMouseLeave={scheduleCloseDropdown}
         >
           {link.children.map(child => (
             <a key={child.label} href={child.href}
-              className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium transition-all duration-150"
-              style={{ color: 'var(--text-muted)' }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--glow-orange)'; e.currentTarget.style.color = 'var(--accent-orange)'; }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--text-muted)'; }}
+              className="nav-dropdown-item flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium"
               onClick={closeAll}
             >
               <span style={{ color: 'var(--accent-orange)' }}>{child.icon}</span>
@@ -261,14 +317,11 @@ export default function Navbar() {
                   <nav className="hidden md:flex items-center gap-1 flex-1 justify-center">
                     {NAV_LINKS.map(link => (
                       <div key={link.label} className="relative"
-                        onMouseEnter={() => link.children && setActiveDropdown(link.label)}
-                        onMouseLeave={() => setActiveDropdown(null)}
+                        onMouseEnter={() => link.children && openDropdown(link.label)}
+                        onMouseLeave={() => link.children && scheduleCloseDropdown()}
                       >
                         <a href={getHref(link.href)}
-                          className="flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider transition-all duration-150"
-                          style={{ color: 'var(--text-muted)' }}
-                          onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-orange)'; e.currentTarget.style.background = 'var(--glow-orange)'; }}
-                          onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+                          className="nav-link flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider"
                           onClick={link.children ? e => e.preventDefault() : closeAll}
                         >
                           {link.label}
@@ -299,19 +352,40 @@ export default function Navbar() {
                       {theme === 'dark' ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
                     </button>
 
-                    {/* Connexion — desktop */}
-                    <Link to="/login" className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
-                      style={{ color: 'var(--text-muted)' }}
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
-                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
-                    >
-                      Connexion
-                    </Link>
+                    {/* Dashboard / Connexion — desktop */}
+                    {session ? (
+                      <>
+                        <Link to="/dashboard" className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                          style={{ color: 'var(--text-muted)' }}
+                          onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
+                          onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                        >
+                          Dashboard
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                          style={{ color: 'var(--accent-orange)' }}
+                        >
+                          Deconnexion
+                        </button>
+                      </>
+                    ) : (
+                      <Link to="/login" className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                        style={{ color: 'var(--text-muted)' }}
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+                      >
+                        Connexion
+                      </Link>
+                    )}
 
                     {/* CTA — desktop */}
-                    <Link to="/register" className="hidden md:block btn-orange rounded-lg px-4 py-1.5 font-display text-[11px] tracking-wider text-center">
-                      Rejoindre ↗
-                    </Link>
+                    {!session && (
+                      <Link to="/register" className="hidden md:block btn-orange rounded-lg px-4 py-1.5 font-display text-[11px] tracking-wider text-center">
+                        Rejoindre ↗
+                      </Link>
+                    )}
 
                     {/* Burger — mobile */}
                     <button onClick={handleBurger}
@@ -362,6 +436,36 @@ export default function Navbar() {
                 }}
               >
                 <div className="py-3">
+                  <div className="px-5 pb-2">
+                    {session ? (
+                      <div className="flex flex-col gap-2">
+                        <Link
+                          to="/dashboard"
+                          className="flex items-center rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-150"
+                          style={{ color: 'var(--accent-orange)', background: 'var(--glow-orange)' }}
+                          onClick={closeAll}
+                        >
+                          Dashboard
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="flex items-center justify-center rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-150"
+                          style={{ color: 'var(--accent-orange)', border: '1px solid var(--border-orange)' }}
+                        >
+                          Deconnexion
+                        </button>
+                      </div>
+                    ) : (
+                      <Link
+                        to="/login"
+                        className="flex items-center rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-150"
+                        style={{ color: 'var(--accent-orange)', background: 'var(--glow-orange)' }}
+                        onClick={closeAll}
+                      >
+                        Connexion
+                      </Link>
+                    )}
+                  </div>
                   {/* Links */}
                   {NAV_LINKS.map(link => (
                     <div key={link.label}>
@@ -414,13 +518,17 @@ export default function Navbar() {
                         Rechercher…
                       </button>
                     </div>
-                    <Link to="/login" onClick={closeAll} className="block w-full rounded-lg py-2 text-xs font-bold uppercase tracking-wider text-center mb-2 transition-all duration-200"
-                      style={{ border: '1px solid var(--border-col)', color: 'var(--text-muted)' }}>
-                      Connexion
-                    </Link>
-                    <Link to="/register" onClick={closeAll} className="block btn-orange w-full rounded-lg py-2 font-display text-xs tracking-wider text-center">
-                      Rejoindre ↗
-                    </Link>
+                    {!session && (
+                      <>
+                        <Link to="/login" onClick={closeAll} className="block w-full rounded-lg py-2 text-xs font-bold uppercase tracking-wider text-center mb-2 transition-all duration-200"
+                          style={{ border: '1px solid var(--border-col)', color: 'var(--text-muted)' }}>
+                          Connexion
+                        </Link>
+                        <Link to="/register" onClick={closeAll} className="block btn-orange w-full rounded-lg py-2 font-display text-xs tracking-wider text-center">
+                          Rejoindre ↗
+                        </Link>
+                      </>
+                    )}
                   </div>
                 </div>
               </motion.div>

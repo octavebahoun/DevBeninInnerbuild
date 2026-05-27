@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DevBénin — Charte Graphique</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0A1A0D;
+  --green:#22C55E;
+  --green-dark:#16A34A;
+  --green-light:#6EE7A0;
+  --green-pale:#EFF6EE;
+  --orange:#F97316;
+  --orange-dim:rgba(249,115,22,0.12);
+  --muted:#9CA3AF;
+  --card:#111F14;
+  --border:rgba(34,197,94,0.15);
+  --border2:rgba(249,115,22,0.25);
+  --radius:8px;
+}
+body{background:var(--bg);color:#E8F5ED;font-family:'Syne',sans-serif;line-height:1.6;}
+
+/* NAV */
+.nav{display:flex;align-items:center;gap:0;border-bottom:1px solid var(--border);padding:0 32px;overflow-x:auto;scrollbar-width:none;background:rgba(10,26,13,0.97);position:sticky;top:0;z-index:100;backdrop-filter:blur(8px);}
+.nav::-webkit-scrollbar{display:none;}
+.nav-logo{display:flex;align-items:center;gap:8px;padding:14px 20px 14px 0;border-right:1px solid var(--border);margin-right:16px;flex-shrink:0;}
+.nav-logomark{font-family:'Black Ops One',sans-serif;font-size:13px;color:var(--green);letter-spacing:0.05em;}
+.nav-btn{font-family:'Syne',sans-serif;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;padding:14px 14px;border:none;background:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s;}
+.nav-btn:hover{color:var(--green);}
+.nav-btn.active{color:var(--green);border-bottom:2px solid var(--green);}
+
+/* PAGES */
+.page{display:none;padding:48px 32px;max-width:900px;margin:0 auto;animation:fi 0.3s ease;}
+.page.active{display:block;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+/* TYPOGRAPHIC ELEMENTS */
+.stag{font-family:'Syne',sans-serif;font-size:9px;font-weight:600;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.stag::after{content:'';flex:1;height:1px;background:var(--border);}
+.ptitle{font-family:'Black Ops One',sans-serif;font-size:32px;color:#fff;margin-bottom:8px;line-height:1.1;letter-spacing:0.02em;}
+.ptitle span{color:var(--green);}
+.psub{font-family:'Syne',sans-serif;font-size:11px;color:var(--muted);margin-bottom:40px;}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px;}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+
+/* CARDS */
+.card{border:1px solid var(--border);border-radius:var(--radius);padding:20px;background:var(--card);}
+.card-sm{border:1px solid var(--border);border-radius:var(--radius);padding:14px;background:var(--card);}
+.lbl{font-family:'Syne',sans-serif;font-size:9px;font-weight:600;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px;}
+.val{font-size:13px;color:var(--green-light);font-weight:600;}
+.dsc{font-family:'Syne',sans-serif;font-size:10px;color:var(--muted);line-height:1.6;margin-top:5px;}
+.div{height:1px;background:var(--border);margin:24px 0;}
+
+/* RULES OK / NO */
+.rule-ok{border-left:3px solid rgba(34,197,94,0.6);padding-left:14px;margin-bottom:12px;}
+.rule-no{border-left:3px solid rgba(239,68,68,0.5);padding-left:14px;margin-bottom:12px;}
+.rule-title{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px;}
+.rule-no .rule-title{color:rgba(255,100,100,0.9);}
+.rule-text{font-family:'Syne',sans-serif;font-size:10px;color:var(--muted);line-height:1.5;}
+
+/* SWATCHES */
+.swatch{border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);}
+.sw-preview{height:80px;}
+.sw-info{padding:14px;background:rgba(13,27,15,0.9);}
+.sw-name{font-family:'Black Ops One',sans-serif;font-size:11px;color:var(--green-light);letter-spacing:0.05em;margin-bottom:3px;}
+.sw-hex{font-family:monospace;font-size:10px;color:var(--muted);}
+.sw-role{font-size:10px;color:var(--muted);margin-top:4px;}
+
+/* COPY BUTTON */
+.copy-btn{font-family:'Syne',sans-serif;font-size:9px;font-weight:600;color:var(--muted);background:none;border:1px solid var(--border);border-radius:4px;padding:4px 10px;cursor:pointer;transition:all 0.15s;letter-spacing:0.1em;}
+.copy-btn:hover{color:var(--green);border-color:var(--border2);}
+.copy-btn.copied{color:var(--green);}
+
+/* COMPOSANTS */
+.btn-primary{background:var(--green);color:#0A1A0D;font-family:'Black Ops One',sans-serif;font-size:12px;border:none;border-radius:6px;padding:12px 24px;cursor:pointer;letter-spacing:0.05em;}
+.btn-cta{background:var(--orange);color:#fff;font-family:'Black Ops One',sans-serif;font-size:12px;border:none;border-radius:6px;padding:12px 24px;cursor:pointer;}
+.btn-outline{background:none;color:var(--orange);border:1px solid var(--orange);font-family:'Syne',sans-serif;font-size:12px;font-weight:600;border-radius:6px;padding:11px 23px;cursor:pointer;}
+.btn-ghost{background:none;color:var(--green-light);border:1px solid var(--border);font-family:'Syne',sans-serif;font-size:12px;font-weight:500;border-radius:6px;padding:11px 23px;cursor:pointer;}
+
+.badge{font-family:'Syne',sans-serif;font-size:9px;font-weight:600;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;display:inline-block;}
+.b-green{background:rgba(34,197,94,0.12);color:var(--green);}
+.b-orange{background:rgba(249,115,22,0.12);color:var(--orange);}
+.b-muted{background:rgba(107,114,128,0.12);color:var(--muted);}
+
+.input-mock{background:rgba(34,197,94,0.04);border:1px solid var(--border);border-radius:6px;padding:10px 14px;font-family:'Syne',sans-serif;font-size:11px;color:var(--green-light);width:100%;}
+.input-mock::placeholder{color:rgba(134,239,172,0.25);}
+
+/* MOTIFS */
+.motif-preview{height:100px;border-radius:6px 6px 0 0;position:relative;overflow:hidden;background:var(--bg);}
+.dots-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(34,197,94,0.3) 1px,transparent 1px);background-size:20px 20px;}
+.circuit-bg{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(34,197,94,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(34,197,94,0.06) 1px,transparent 1px);
+  background-size:22px 22px;}
+.circuit-nodes{position:absolute;inset:0;}
+.neuron-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+
+/* ANIMATION TAGS */
+.anim-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:6px;margin-bottom:8px;}
+.anim-zone{font-size:10px;font-weight:600;color:var(--green-light);min-width:110px;text-transform:uppercase;letter-spacing:0.08em;}
+.anim-type{font-size:11px;color:#E2F5EA;flex:1;}
+.anim-tool{font-size:10px;font-family:monospace;color:var(--orange);background:rgba(249,115,22,0.1);padding:2px 8px;border-radius:4px;}
+
+/* USAGE BLOCK */
+.usage-block{background:rgba(34,197,94,0.04);border-left:2px solid rgba(34,197,94,0.35);padding:14px 18px;border-radius:0 6px 6px 0;margin-bottom:16px;}
+.mono-code{font-family:monospace;font-size:10px;color:var(--green-light);line-height:2;}
+.mono-c{color:var(--muted);}
+
+/* PROFILE CARD MOCK */
+.profile-mock{background:#111F14;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.profile-cover{height:60px;background:linear-gradient(135deg,#0A1A0D,#182B1C);}
+.profile-body{padding:16px;}
+.avatar-mock{width:44px;height:44px;border-radius:50%;background:var(--green-dark);border:2px solid var(--bg);display:flex;align-items:center;justify-content:center;font-family:'Black Ops One',sans-serif;font-size:14px;color:#fff;margin-top:-22px;margin-bottom:8px;}
+
+/* ARTICLE CARD MOCK */
+.article-mock{background:#111F14;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.article-thumb{height:80px;background:linear-gradient(135deg,#122914,#0a1f0c);display:flex;align-items:center;justify-content:center;}
+.article-body{padding:14px;}
+
+/* HERO MOCK */
+.hero-mock{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:28px 24px;position:relative;overflow:hidden;}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(34,197,94,0.08) 1px,transparent 1px);background-size:24px 24px;}
+.hero-content{position:relative;z-index:2;}
+.hero-h1{font-family:'Black Ops One',sans-serif;font-size:22px;color:#fff;line-height:1.2;margin-bottom:6px;}
+.hero-h1 span{color:var(--green);}
+.hero-sub{font-size:11px;color:var(--green-light);margin-bottom:16px;}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.hero-btn-p{font-family:'Black Ops One',sans-serif;font-size:10px;background:var(--green);color:#0A1A0D;border:none;border-radius:6px;padding:8px 16px;cursor:pointer;}
+.hero-btn-s{font-family:'Syne',sans-serif;font-size:10px;font-weight:600;background:none;color:var(--orange);border:1px solid var(--orange);border-radius:6px;padding:7px 15px;cursor:pointer;}
+
+/* NAVBAR MOCK */
+.navbar-mock{background:#111C13;border:1px solid var(--border);border-radius:var(--radius);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;}
+.nm-logo{font-family:'Black Ops One',sans-serif;font-size:13px;color:#fff;}
+.nm-logo span{color:var(--green);}
+.nm-burger{display:flex;flex-direction:column;gap:4px;}
+.nm-bar{height:2px;background:var(--green);border-radius:2px;}
+.nm-bar-l{width:20px;}.nm-bar-s{width:13px;}
+.nm-actions{display:flex;align-items:center;gap:8px;}
+.nm-link{font-size:10px;color:var(--muted);font-weight:500;}
+.nm-cta{font-family:'Black Ops One',sans-serif;font-size:10px;background:var(--orange);color:#fff;border:none;border-radius:4px;padding:6px 12px;cursor:pointer;}
+
+/* MISC */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:10px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);color:var(--green-light);}
+.icon-row{display:flex;gap:10px;flex-wrap:wrap;}
+.icon-item{border:1px solid var(--border);border-radius:6px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);min-width:64px;}
+.icon-lbl{font-size:8px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;}
+
+.ratio-bar{display:flex;height:20px;border-radius:4px;overflow:hidden;margin-bottom:12px;}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">
+    <span class="nav-logomark">Dev<span style="color:#6EE7A0">Bénin</span></span>
+  </div>
+  <button class="nav-btn active" onclick="show('intro')">Intro</button>
+  <button class="nav-btn" onclick="show('logo')">Logo</button>
+  <button class="nav-btn" onclick="show('couleurs')">Couleurs</button>
+  <button class="nav-btn" onclick="show('typo')">Typographie</button>
+  <button class="nav-btn" onclick="show('motifs')">Motifs</button>
+  <button class="nav-btn" onclick="show('composants')">Composants</button>
+  <button class="nav-btn" onclick="show('layout')">Layout</button>
+  <button class="nav-btn" onclick="show('templates')">Templates</button>
+  <button class="nav-btn" onclick="show('regles')">Règles</button>
+</nav>
+
+<!-- ====== INTRO ====== -->
+<div id="intro" class="page active">
+  <div class="stag">Charte Graphique — DevBénin · InnerBuild S02</div>
+  <div class="ptitle">Vibrant<br><span>&amp; Communautaire</span></div>
+  <div class="psub">→ v1.0 · Vert dominant × Orange CTA · Black Ops One × Syne</div>
+
+  <div class="g3">
+    <div class="card">
+      <div class="lbl">Positionnement</div>
+      <div class="val" style="font-size:12px;line-height:1.6;">Communauté tech béninoise · Open source · Apprentissage</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Concept visuel</div>
+      <div class="val" style="font-size:12px;line-height:1.6;">Vibrant & Communautaire — Énergie locale + Impact tech</div>
+    </div>
+    <div class="card">
+      <div class="lbl">Tonalité</div>
+      <div class="val" style="font-size:12px;line-height:1.6;">Accessible · Dynamique · Inclusif · Fier de l'identité béninoise</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div class="stag">Éléments fondateurs</div>
+  <div class="g4">
+    <div class="card-sm" style="text-align:center;">
+      <div style="margin-bottom:12px;">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxOCIgZmlsbD0iIzIyQzU1RSIvPjwvc3ZnPg==" width="36" height="36" alt="Logo placeholder" style="border-radius:50%;"/>
+      </div>
+      <div class="lbl" style="text-align:center;">Logo</div>
+      <div class="dsc" style="text-align:center;">Spirale verte organique</div>
+    </div>
+    <div class="card-sm" style="text-align:center;">
+      <div style="font-family:'Black Ops One',sans-serif;font-size:18px;color:#fff;margin-bottom:12px;">Dev<span style="color:#22C55E">BJ</span></div>
+      <div class="lbl" style="text-align:center;">Wordmark</div>
+      <div class="dsc" style="text-align:center;">Black Ops One · identitaire</div>
+    </div>
+    <div class="card-sm" style="text-align:center;">
+      <div style="display:flex;gap:5px;justify-content:center;margin-bottom:12px;">
+        <div style="width:18px;height:18px;border-radius:50%;background:#0A1A0D;border:1px solid var(--border);"></div>
+        <div style="width:18px;height:18px;border-radius:50%;background:#22C55E;"></div>
+        <div style="width:18px;height:18px;border-radius:50%;background:#F97316;"></div>
+      </div>
+      <div class="lbl" style="text-align:center;">Palette</div>
+      <div class="dsc" style="text-align:center;">3 couleurs · 2 typographies</div>
+    </div>
+    <div class="card-sm" style="text-align:center;">
+      <div style="font-family:'Syne',sans-serif;font-size:11px;color:var(--green);margin-bottom:12px;font-weight:700;">→ Construisons</div>
+      <div class="lbl" style="text-align:center;">Voix</div>
+      <div class="dsc" style="text-align:center;">Inclusif · Fédérateur · Action</div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div style="text-align:center;padding:16px 0;">
+    <div style="font-size:11px;color:var(--muted);margin-bottom:16px;">Naviguez dans les sections pour explorer la charte complète</div>
+    <button onclick="show('logo')" class="btn-primary">Commencer →</button>
+  </div>
+</div>
+
+<!-- ====== LOGO ====== -->
+<div id="logo" class="page">
+  <div class="stag">02 — Identité Logo</div>
+  <div class="ptitle">Le <span>Logo</span></div>
+  <div class="psub">→ Logo officiel existant + règles d'usage</div>
+
+  <div class="stag">Versions</div>
+  <div class="g2" style="margin-bottom:24px;">
+    <div class="card" style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:36px 20px;">
+      <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 15 C30 15, 15 30, 15 50 C15 65, 25 78, 40 83 C35 72, 38 60, 50 55 C62 60, 65 72, 60 83 C75 78, 85 65, 85 50 C85 30, 70 15, 50 15Z" fill="#22C55E"/>
+        <path d="M40 83 C44 88, 47 90, 50 90 C53 90, 56 88, 60 83 C55 80, 50 82, 45 80Z" fill="#22C55E" opacity="0.6"/>
+      </svg>
+      <div style="font-family:'Black Ops One',sans-serif;font-size:20px;color:#fff;text-align:center;">Dev<span style="color:#22C55E">Bénin</span></div>
+      <div class="lbl">Version principale — fond sombre</div>
+    </div>
+    <div class="card" style="background:#F8FAFC;display:flex;flex-direction:column;align-items:center;gap:16px;padding:36px 20px;">
+      <svg width="64" height="64" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 15 C30 15, 15 30, 15 50 C15 65, 25 78, 40 83 C35 72, 38 60, 50 55 C62 60, 65 72, 60 83 C75 78, 85 65, 85 50 C85 30, 70 15, 50 15Z" fill="#16A34A"/>
+        <path d="M40 83 C44 88, 47 90, 50 90 C53 90, 56 88, 60 83 C55 80, 50 82, 45 80Z" fill="#16A34A" opacity="0.6"/>
+      </svg>
+      <div style="font-family:'Black Ops One',sans-serif;font-size:20px;color:#111;text-align:center;">Dev<span style="color:#16A34A">Bénin</span></div>
+      <div style="font-size:9px;color:#4B5563;letter-spacing:0.15em;text-transform:uppercase;">Version inversée — fond clair</div>
+    </div>
+  </div>
+
+  <div class="stag">Zone de protection</div>
+  <div class="card" style="margin-bottom:20px;">
+    <div class="dsc" style="margin-bottom:16px;">Autour du logo, maintenir une zone vide minimale équivalente à la largeur du pictogramme de chaque côté.</div>
+    <div style="display:inline-block;border:1px dashed rgba(34,197,94,0.2);padding:20px;border-radius:4px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg width="36" height="36" viewBox="0 0 100 100" fill="none"><path d="M50 15 C30 15, 15 30, 15 50 C15 65, 25 78, 40 83 C35 72, 38 60, 50 55 C62 60, 65 72, 60 83 C75 78, 85 65, 85 50 C85 30, 70 15, 50 15Z" fill="#22C55E"/></svg>
+        <span style="font-family:'Black Ops One',sans-serif;font-size:16px;color:#fff;">Dev<span style="color:#22C55E">Bénin</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stag">Règles logo</div>
+  <div class="g2">
+    <div>
+      <div class="rule-ok"><div class="rule-title">✓ Autorisé</div><div class="rule-text">Logo sur fond sombre #0A1A0D<br>Logo sur fond clair #F8FAFC<br>Logo seul (pictogramme sans wordmark) en favicon<br>Conserver les proportions originales</div></div>
+    </div>
+    <div>
+      <div class="rule-no"><div class="rule-title">✗ Interdit</div><div class="rule-text">Changer la couleur du pictogramme<br>Ajouter des effets (ombre, contour) sans validation<br>Déformer ou étirer le logo<br>Placer sur fond coloré non validé</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== COULEURS ====== -->
+<div id="couleurs" class="page">
+  <div class="stag">03 — Colorimétrie</div>
+  <div class="ptitle">Palette <span>Couleurs</span></div>
+  <div class="psub">→ Vert dominant × Orange CTA + accents · dark/light toggle</div>
+
+  <div class="stag">Couleurs primaires</div>
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="swatch">
+      <div class="sw-preview" style="background:#0A1A0D;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:9px;color:rgba(110,231,160,0.3);letter-spacing:0.15em;font-weight:600;">FOND PRINCIPAL · 70%</span>
+      </div>
+      <div class="sw-info">
+        <div style="display:flex;justify-content:space-between;align-items:start;">
+          <div>
+            <div class="sw-name">Fond principal</div>
+            <div class="sw-hex">#0A1A0D</div>
+            <div class="sw-role">Fond dark · sérieux · ancrage identitaire</div>
+          </div>
+          <button class="copy-btn" onclick="copyColor('#0A1A0D',this)">COPIER</button>
+        </div>
+        <div class="div" style="margin:10px 0;"></div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div><div class="lbl">RGB</div><div class="sw-hex">10, 26, 13</div></div>
+          <div><div class="lbl">HSL</div><div class="sw-hex">131° 44% 7%</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-preview" style="background:#22C55E;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:9px;color:rgba(10,26,13,0.5);letter-spacing:0.15em;font-weight:600;">VERT DOMINANT · 20%</span>
+      </div>
+      <div class="sw-info">
+        <div style="display:flex;justify-content:space-between;align-items:start;">
+          <div>
+            <div class="sw-name">Vert dominant</div>
+            <div class="sw-hex">#22C55E</div>
+            <div class="sw-role">Couleur signature · éléments principaux · liens</div>
+          </div>
+          <button class="copy-btn" onclick="copyColor('#22C55E',this)">COPIER</button>
+        </div>
+        <div class="div" style="margin:10px 0;"></div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div><div class="lbl">RGB</div><div class="sw-hex">34, 197, 94</div></div>
+          <div><div class="lbl">HSL</div><div class="sw-hex">142° 71% 45%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stag">Couleur d'action</div>
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="swatch">
+      <div class="sw-preview" style="background:#F97316;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:9px;color:rgba(255,255,255,0.5);letter-spacing:0.15em;font-weight:600;">CTA + ACCENTS · 10%</span>
+      </div>
+      <div class="sw-info">
+        <div style="display:flex;justify-content:space-between;align-items:start;">
+          <div>
+            <div class="sw-name">Orange Action</div>
+            <div class="sw-hex">#F97316</div>
+            <div class="sw-role">Call-to-action exclusivement · boutons primaires d'action</div>
+          </div>
+          <button class="copy-btn" onclick="copyColor('#F97316',this)">COPIER</button>
+        </div>
+        <div class="div" style="margin:10px 0;"></div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <div><div class="lbl">RGB</div><div class="sw-hex">249, 115, 22</div></div>
+          <div><div class="lbl">HSL</div><div class="sw-hex">25° 95% 53%</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-preview" style="background:#6EE7A0;"></div>
+      <div class="sw-info">
+        <div style="display:flex;justify-content:space-between;">
+          <div>
+            <div class="sw-name">Vert clair</div>
+            <div class="sw-hex">#6EE7A0</div>
+            <div class="sw-role">Sous-titres · textes secondaires · icônes</div>
+          </div>
+          <button class="copy-btn" onclick="copyColor('#6EE7A0',this)">COPIER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stag">Variables CSS</div>
+  <div class="usage-block">
+    <div class="mono-code">
+      <span class="mono-c">/* Variables CSS — DevBénin */</span><br>
+      :root {<br>
+      &nbsp;&nbsp;--green: <span style="color:#22C55E">#22C55E</span>;<br>
+      &nbsp;&nbsp;--green-dark: <span style="color:#16A34A">#16A34A</span>;<br>
+      &nbsp;&nbsp;--green-light: <span style="color:#6EE7A0">#6EE7A0</span>;<br>
+      &nbsp;&nbsp;--orange: <span style="color:#F97316">#F97316</span>;<br>
+      &nbsp;&nbsp;--bg-dark: <span style="color:#6EE7A0">#0A1A0D</span>;<br>
+      &nbsp;&nbsp;--bg-card: <span style="color:#6EE7A0">#111F14</span>;<br>
+      &nbsp;&nbsp;--bg-surface: <span style="color:#6EE7A0">#182B1C</span>;<br>
+      &nbsp;&nbsp;--bg-light: <span style="color:#6EE7A0">#F8FAFC</span>;<br>
+      &nbsp;&nbsp;--bg-light-card: <span style="color:#6EE7A0">#FFFFFF</span>;<br>
+      &nbsp;&nbsp;--border: <span style="color:#6EE7A0">rgba(34,197,94,0.15)</span>;<br>
+      }
+    </div>
+  </div>
+
+  <div class="stag">Ratio d'utilisation</div>
+  <div class="card">
+    <div class="ratio-bar">
+      <div style="background:#0A1A0D;flex:7;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);"><span style="font-size:9px;color:rgba(110,231,160,0.4);font-weight:600;">Fond · 70%</span></div>
+      <div style="background:#22C55E;flex:2;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#0A1A0D;font-weight:700;">20%</span></div>
+      <div style="background:#F97316;flex:1;display:flex;align-items:center;justify-content:center;"><span style="font-size:9px;color:#fff;font-weight:700;">10%</span></div>
+    </div>
+    <div class="dsc">Fond + cards dominants · Vert signature en priorité · Orange pour CTA et accents. Ne jamais inverser ce ratio.</div>
+  </div>
+
+  <div class="div"></div>
+  <div class="stag">Mode Clair — Light Mode</div>
+  <div class="g2">
+    <div class="swatch">
+      <div class="sw-preview" style="background:#F8FAFC;"></div>
+      <div class="sw-info">
+        <div style="display:flex;justify-content:space-between;">
+          <div><div class="sw-name" style="color:#16A34A;">Fond Light</div><div class="sw-hex">#F8FAFC</div></div>
+          <button class="copy-btn" onclick="copyColor('#F8FAFC',this)">COPIER</button>
+        </div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="sw-preview" style="background:#FFFFFF;"></div>
+      <div class="sw-info">
+        <div style="display:flex;justify-content:space-between;">
+          <div><div class="sw-name" style="color:#16A34A;">Cards Light</div><div class="sw-hex">#FFFFFF</div></div>
+          <button class="copy-btn" onclick="copyColor('#FFFFFF',this)">COPIER</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== TYPO ====== -->
+<div id="typo" class="page">
+  <div class="stag">04 — Typographie</div>
+  <div class="ptitle">Polices <span>& Échelle</span></div>
+  <div class="psub">→ Black Ops One (display) × Syne (body)</div>
+
+  <div class="stag">Police display — Titres / Hero / CTA</div>
+  <div class="card" style="margin-bottom:16px;padding:28px;">
+    <div style="font-family:'Black Ops One',sans-serif;font-size:38px;color:#fff;margin-bottom:8px;letter-spacing:0.02em;">Black Ops One</div>
+    <div style="font-family:'Black Ops One',sans-serif;font-size:18px;color:var(--green);margin-bottom:20px;">CONSTRUISONS L'AVENIR TECH DU BÉNIN</div>
+    <div class="div"></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div class="card-sm" style="padding:10px 14px;"><div class="lbl">Style</div><div class="val">Regular (seul poids)</div></div>
+      <div class="card-sm" style="padding:10px 14px;"><div class="lbl">Usage</div><div class="val">H1, H2, H3, CTA, Hero</div></div>
+      <div class="card-sm" style="padding:10px 14px;"><div class="lbl">Source</div><div class="val">Google Fonts</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Police body — Navigation / Textes / UI</div>
+  <div class="card" style="margin-bottom:24px;padding:28px;">
+    <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--green-light);margin-bottom:8px;">Syne</div>
+    <div style="font-family:'Syne',sans-serif;font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;">La plus grande communauté de développeurs au Bénin. Apprenez, partagez vos connaissances et collaborez sur des projets open source innovants.</div>
+    <div class="div"></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div class="card-sm" style="padding:10px 14px;"><div class="lbl">Poids</div><div class="val">400 · 500 · 600 · 700 · 800</div></div>
+      <div class="card-sm" style="padding:10px 14px;"><div class="lbl">Usage</div><div class="val">Body, nav, labels, UI</div></div>
+      <div class="card-sm" style="padding:10px 14px;"><div class="lbl">Source</div><div class="val">Google Fonts</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Échelle typographique</div>
+  <div class="card">
+    <div style="border-bottom:1px solid var(--border);padding:14px 0;display:flex;align-items:baseline;gap:16px;">
+      <span style="font-size:10px;color:var(--muted);min-width:90px;font-family:monospace;">H1 · 48px</span>
+      <span style="font-family:'Black Ops One',sans-serif;font-size:26px;color:#fff;">Construisons</span>
+    </div>
+    <div style="border-bottom:1px solid var(--border);padding:14px 0;display:flex;align-items:baseline;gap:16px;">
+      <span style="font-size:10px;color:var(--muted);min-width:90px;font-family:monospace;">H2 · 32px</span>
+      <span style="font-family:'Black Ops One',sans-serif;font-size:18px;color:#fff;">Nos Membres</span>
+    </div>
+    <div style="border-bottom:1px solid var(--border);padding:14px 0;display:flex;align-items:baseline;gap:16px;">
+      <span style="font-size:10px;color:var(--muted);min-width:90px;font-family:monospace;">H3 · 24px</span>
+      <span style="font-family:'Black Ops One',sans-serif;font-size:14px;color:#fff;">Projets Open Source</span>
+    </div>
+    <div style="border-bottom:1px solid var(--border);padding:14px 0;display:flex;align-items:baseline;gap:16px;">
+      <span style="font-size:10px;color:var(--muted);min-width:90px;font-family:monospace;">Body · 16px</span>
+      <span style="font-family:'Syne',sans-serif;font-size:13px;color:var(--green-light);">La communauté des développeurs béninois réunis autour de l'innovation.</span>
+    </div>
+    <div style="border-bottom:1px solid var(--border);padding:14px 0;display:flex;align-items:baseline;gap:16px;">
+      <span style="font-size:10px;color:var(--muted);min-width:90px;font-family:monospace;">Small · 12px</span>
+      <span style="font-family:'Syne',sans-serif;font-size:11px;color:var(--muted);">Étiquettes, badges, méta-informations, dates</span>
+    </div>
+    <div style="padding:14px 0;display:flex;align-items:baseline;gap:16px;">
+      <span style="font-size:10px;color:var(--muted);min-width:90px;font-family:monospace;">CTA · 14px</span>
+      <span style="font-family:'Black Ops One',sans-serif;font-size:12px;color:var(--orange);">Rejoindre l'Élite ↗</span>
+    </div>
+  </div>
+</div>
+
+<!-- ====== MOTIFS ====== -->
+<div id="motifs" class="page">
+  <div class="stag">05 — Motifs Graphiques</div>
+  <div class="ptitle">Éléments <span>& Textures</span></div>
+  <div class="psub">→ 3 motifs · 1 par zone · cohérence visuelle</div>
+
+  <div class="stag">Motifs actifs</div>
+  <div class="g3" style="margin-bottom:24px;">
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="motif-preview">
+        <div class="neuron-bg">
+          <svg width="100" height="80" viewBox="0 0 100 80" fill="none">
+            <circle cx="50" cy="40" r="5" fill="#22C55E" opacity="0.9"/>
+            <circle cx="20" cy="20" r="3" fill="#22C55E" opacity="0.5"/>
+            <circle cx="80" cy="20" r="3" fill="#22C55E" opacity="0.5"/>
+            <circle cx="15" cy="60" r="3" fill="#22C55E" opacity="0.5"/>
+            <circle cx="85" cy="60" r="3" fill="#22C55E" opacity="0.5"/>
+            <circle cx="50" cy="8" r="2.5" fill="#22C55E" opacity="0.4"/>
+            <circle cx="50" cy="72" r="2.5" fill="#22C55E" opacity="0.4"/>
+            <circle cx="35" cy="30" r="2" fill="#22C55E" opacity="0.3"/>
+            <circle cx="65" cy="50" r="2" fill="#22C55E" opacity="0.3"/>
+            <line x1="50" y1="40" x2="20" y2="20" stroke="#22C55E" stroke-width="0.7" opacity="0.35"/>
+            <line x1="50" y1="40" x2="80" y2="20" stroke="#22C55E" stroke-width="0.7" opacity="0.35"/>
+            <line x1="50" y1="40" x2="15" y2="60" stroke="#22C55E" stroke-width="0.7" opacity="0.35"/>
+            <line x1="50" y1="40" x2="85" y2="60" stroke="#22C55E" stroke-width="0.7" opacity="0.35"/>
+            <line x1="50" y1="40" x2="50" y2="8" stroke="#22C55E" stroke-width="0.7" opacity="0.25"/>
+            <line x1="50" y1="40" x2="50" y2="72" stroke="#22C55E" stroke-width="0.7" opacity="0.25"/>
+            <line x1="20" y1="20" x2="80" y2="20" stroke="#22C55E" stroke-width="0.4" opacity="0.15"/>
+            <line x1="15" y1="60" x2="85" y2="60" stroke="#22C55E" stroke-width="0.4" opacity="0.15"/>
+          </svg>
+        </div>
+      </div>
+      <div style="padding:14px;">
+        <div class="lbl">Neurones / Réseau</div>
+        <div class="val" style="font-size:11px;">Carte du Bénin interactive</div>
+        <div class="dsc">Hero uniquement · Three.js · interactif au hover/scroll</div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="motif-preview">
+        <div class="dots-bg"></div>
+      </div>
+      <div style="padding:14px;">
+        <div class="lbl">Dot Grid</div>
+        <div class="val" style="font-size:11px;">Réseau communautaire</div>
+        <div class="dsc">Sections intérieures · statique · #22C55E à 4% opacité</div>
+      </div>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div class="motif-preview">
+        <div class="circuit-bg"></div>
+        <div class="circuit-nodes">
+          <svg width="100%" height="100%" viewBox="0 0 200 100" fill="none" preserveAspectRatio="xMidYMid slice">
+            <circle cx="40" cy="30" r="3" fill="#22C55E" opacity="0.2"/>
+            <circle cx="100" cy="60" r="3" fill="#22C55E" opacity="0.2"/>
+            <circle cx="160" cy="30" r="3" fill="#22C55E" opacity="0.2"/>
+            <circle cx="70" cy="80" r="2" fill="#22C55E" opacity="0.15"/>
+            <circle cx="140" cy="70" r="2" fill="#22C55E" opacity="0.15"/>
+            <line x1="40" y1="30" x2="100" y2="60" stroke="#22C55E" stroke-width="0.8" opacity="0.12"/>
+            <line x1="100" y1="60" x2="160" y2="30" stroke="#22C55E" stroke-width="0.8" opacity="0.12"/>
+            <line x1="40" y1="30" x2="70" y2="80" stroke="#22C55E" stroke-width="0.8" opacity="0.12"/>
+          </svg>
+        </div>
+      </div>
+      <div style="padding:14px;">
+        <div class="lbl">Circuit organique</div>
+        <div class="val" style="font-size:11px;">Footer uniquement</div>
+        <div class="dsc">Inspiré du logo · #22C55E à 5% opacité · statique</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stag">Animations</div>
+  <div class="anim-item"><span class="anim-zone">Navbar</span><span class="anim-type">Burger → élargissement horizontal (desktop) / dropdown centré (mobile)</span><span class="anim-tool">GSAP</span></div>
+  <div class="anim-item"><span class="anim-zone">Hero · Titre</span><span class="anim-type">Reveal-left à l'entrée de page</span><span class="anim-tool">GSAP</span></div>
+  <div class="anim-item"><span class="anim-zone">Hero · CTA</span><span class="anim-type">Reveal-left puis pulse en boucle</span><span class="anim-tool">GSAP</span></div>
+  <div class="anim-item"><span class="anim-zone">Hero · Carte</span><span class="anim-type">Neurones interactifs — réagit au hover et scroll</span><span class="anim-tool">Three.js</span></div>
+  <div class="anim-item"><span class="anim-zone">Sections</span><span class="anim-type">Scroll reveal-left et reveal-right alternés</span><span class="anim-tool">GSAP ScrollTrigger</span></div>
+</div>
+
+<!-- ====== COMPOSANTS ====== -->
+<div id="composants" class="page">
+  <div class="stag">06 — Composants UI</div>
+  <div class="ptitle">Design <span>System</span></div>
+  <div class="psub">→ boutons · badges · inputs · cards</div>
+
+  <div class="stag">Boutons</div>
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:16px;">
+      <button class="btn-primary">Rejoindre l'Élite ↗</button>
+      <button class="btn-cta">Commencer maintenant</button>
+      <button class="btn-outline">Voir les projets →</button>
+      <button class="btn-ghost">Se connecter</button>
+    </div>
+    <div class="div"></div>
+    <div class="g4">
+      <div><div class="lbl">Primaire</div><div class="dsc">Vert · actions principales · validations</div></div>
+      <div><div class="lbl">CTA</div><div class="dsc">Orange · rejoindre · inscription · urgence</div></div>
+      <div><div class="lbl">Outline</div><div class="dsc">Bordure orange · actions secondaires</div></div>
+      <div><div class="lbl">Ghost</div><div class="dsc">Transparent · navigation · liens</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Badges & Tags</div>
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+      <span class="badge b-green">Communauté</span>
+      <span class="badge b-green">Open Source</span>
+      <span class="badge b-green">Tuto</span>
+      <span class="badge b-green">Découverte</span>
+      <span class="badge b-orange">Challenge actif</span>
+      <span class="badge b-orange">Rejoindre</span>
+      <span class="badge b-muted">Annonce</span>
+      <span class="badge b-muted">Général</span>
+    </div>
+    <div class="dsc">Vert = contenu / communauté · Orange = action / urgence · Gris = neutre / info</div>
+  </div>
+
+  <div class="stag">Inputs</div>
+  <div class="card" style="margin-bottom:16px;">
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:420px;">
+      <input class="input-mock" placeholder="Rechercher un dev, projet, article…" readonly/>
+      <input class="input-mock" placeholder="Ton email" readonly/>
+    </div>
+  </div>
+
+  <div class="stag">Iconographie</div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="background:rgba(34,197,94,0.12);color:var(--green);font-size:11px;padding:4px 10px;border-radius:4px;font-family:monospace;">Lucide Icons</span>
+      <span style="font-size:12px;color:var(--green-light);">Style outline · open source · cohérent avec Syne</span>
+    </div>
+    <div class="dsc">Taille standard : 20px (UI) · 24px (hero/titre) · couleur : var(--green) ou var(--muted) selon contexte</div>
+  </div>
+</div>
+
+<!-- ====== LAYOUT ====== -->
+<div id="layout" class="page">
+  <div class="stag">07 — Layout & Espacements</div>
+  <div class="ptitle">Grille <span>& Structure</span></div>
+  <div class="psub">→ base 4px · max 1024px · 48px sections</div>
+
+  <div class="stag">Valeurs fondamentales</div>
+  <div class="g4" style="margin-bottom:24px;">
+    <div class="card-sm"><div class="lbl">Base unit</div><div class="val">4px</div><div class="dsc">Tout multiple de 4</div></div>
+    <div class="card-sm"><div class="lbl">Max-width</div><div class="val">1024px</div><div class="dsc">Container principal</div></div>
+    <div class="card-sm"><div class="lbl">Section padding</div><div class="val">48px</div><div class="dsc">Vertical · haut et bas</div></div>
+    <div class="card-sm"><div class="lbl">Grid gap</div><div class="val">16px</div><div class="dsc">Entre les colonnes</div></div>
+  </div>
+  <div class="g4" style="margin-bottom:24px;">
+    <div class="card-sm"><div class="lbl">Radius card</div><div class="val">8px</div><div class="dsc">Cartes et containers</div></div>
+    <div class="card-sm"><div class="lbl">Radius btn</div><div class="val">6px</div><div class="dsc">Boutons et inputs</div></div>
+    <div class="card-sm"><div class="lbl">Radius badge</div><div class="val">20px</div><div class="dsc">Badges et chips</div></div>
+    <div class="card-sm"><div class="lbl">Border</div><div class="val">0.5px</div><div class="dsc">rgba(green, 0.1)</div></div>
+  </div>
+
+  <div class="stag">Échelle d'espacement (multiples de 4)</div>
+  <div class="card" style="margin-bottom:24px;">
+    <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;">
+      <div style="text-align:center;"><div style="width:4px;height:4px;background:var(--green);border-radius:1px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">4px</div></div>
+      <div style="text-align:center;"><div style="width:8px;height:8px;background:var(--green);border-radius:1px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">8px</div></div>
+      <div style="text-align:center;"><div style="width:12px;height:12px;background:var(--green);border-radius:2px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">12px</div></div>
+      <div style="text-align:center;"><div style="width:16px;height:16px;background:var(--green);border-radius:2px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">16px</div></div>
+      <div style="text-align:center;"><div style="width:24px;height:24px;background:var(--green);border-radius:3px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">24px</div></div>
+      <div style="text-align:center;"><div style="width:32px;height:32px;background:var(--green);border-radius:4px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">32px</div></div>
+      <div style="text-align:center;"><div style="width:48px;height:48px;background:var(--green);border-radius:6px;margin:0 auto 6px;"></div><div style="font-size:9px;color:var(--muted);">48px</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Structure des sections</div>
+  <div class="usage-block">
+    <div class="mono-code">
+      <span class="mono-c">/* Patron de section standard */</span><br>
+      .section {<br>
+      &nbsp;&nbsp;padding: <span style="color:#22C55E">48px 32px</span>;<br>
+      &nbsp;&nbsp;max-width: <span style="color:#22C55E">1024px</span>;<br>
+      &nbsp;&nbsp;margin: <span style="color:#22C55E">0 auto</span>;<br>
+      }<br><br>
+      <span class="mono-c">/* Cards */</span><br>
+      .card {<br>
+      &nbsp;&nbsp;border-radius: <span style="color:#22C55E">8px</span>;<br>
+      &nbsp;&nbsp;border: <span style="color:#22C55E">0.5px solid rgba(34,197,94,0.1)</span>;<br>
+      &nbsp;&nbsp;padding: <span style="color:#22C55E">20px</span>;<br>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- ====== TEMPLATES ====== -->
+<div id="templates" class="page">
+  <div class="stag">08 — Templates UI</div>
+  <div class="ptitle">Maquettes <span>Clés</span></div>
+  <div class="psub">→ navbar · hero · profil · article</div>
+
+  <div class="stag">Navbar — État fermé</div>
+  <div class="navbar-mock" style="margin-bottom:8px;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="nm-burger">
+        <div class="nm-bar nm-bar-s"></div>
+        <div class="nm-bar nm-bar-l"></div>
+        <div class="nm-bar nm-bar-s"></div>
+      </div>
+      <span class="nm-logo">Dev<span style="color:#22C55E">Bénin</span></span>
+    </div>
+    <div class="nm-actions">
+      <span class="nm-link">Se connecter</span>
+      <button class="nm-cta">Rejoindre</button>
+    </div>
+  </div>
+  <div class="dsc" style="margin-bottom:20px;">Burger centré + logo · sticky · s'élargit horizontalement sur desktop au clic</div>
+
+  <div class="stag">Navbar — Étendue (desktop)</div>
+  <div class="navbar-mock" style="margin-bottom:20px;flex-wrap:wrap;gap:8px;">
+    <span class="nm-logo">Dev<span style="color:#22C55E">Bénin</span></span>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <span style="font-size:10px;color:var(--green);font-weight:600;">Accueil</span>
+      <span style="font-size:10px;color:var(--muted);">Communauté ↓</span>
+      <span style="font-size:10px;color:var(--muted);">Ressources ↓</span>
+      <div style="width:1px;height:16px;background:var(--border);"></div>
+      <span style="font-size:10px;color:var(--muted);">🔍 Rechercher...</span>
+      <span style="font-size:10px;color:var(--muted);">☀</span>
+      <span style="font-size:10px;color:var(--muted);">Se connecter</span>
+      <button class="nm-cta">Rejoindre</button>
+    </div>
+  </div>
+
+  <div class="stag">Hero Section</div>
+  <div class="hero-mock" style="margin-bottom:20px;">
+    <div class="hero-dots"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;">
+      <div class="hero-content">
+        <span class="badge b-green" style="margin-bottom:12px;display:inline-block;">🇧🇯 Communauté Tech</span>
+        <div class="hero-h1">CONSTRUISONS<br>L'AVENIR <span>TECH</span><br>DU BÉNIN</div>
+        <div class="hero-sub" style="margin-top:8px;">La plus grande communauté de développeurs au Bénin.</div>
+        <div class="hero-btns">
+          <button class="hero-btn-p">Rejoindre l'Élite ↗</button>
+          <button class="hero-btn-s">Voir les projets →</button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <svg width="140" height="140" viewBox="0 0 140 140" fill="none">
+          <circle cx="70" cy="70" r="5" fill="#22C55E" opacity="0.9"/>
+          <circle cx="30" cy="35" r="4" fill="#22C55E" opacity="0.6"/>
+          <circle cx="110" cy="35" r="4" fill="#22C55E" opacity="0.6"/>
+          <circle cx="20" cy="90" r="3.5" fill="#22C55E" opacity="0.5"/>
+          <circle cx="120" cy="90" r="3.5" fill="#22C55E" opacity="0.5"/>
+          <circle cx="70" cy="15" r="3" fill="#22C55E" opacity="0.4"/>
+          <circle cx="70" cy="125" r="3" fill="#22C55E" opacity="0.4"/>
+          <circle cx="45" cy="55" r="2.5" fill="#22C55E" opacity="0.3"/>
+          <circle cx="95" cy="105" r="2.5" fill="#22C55E" opacity="0.3"/>
+          <circle cx="50" cy="110" r="2" fill="#22C55E" opacity="0.25"/>
+          <circle cx="100" cy="50" r="2" fill="#22C55E" opacity="0.25"/>
+          <line x1="70" y1="70" x2="30" y2="35" stroke="#22C55E" stroke-width="0.8" opacity="0.3"/>
+          <line x1="70" y1="70" x2="110" y2="35" stroke="#22C55E" stroke-width="0.8" opacity="0.3"/>
+          <line x1="70" y1="70" x2="20" y2="90" stroke="#22C55E" stroke-width="0.8" opacity="0.3"/>
+          <line x1="70" y1="70" x2="120" y2="90" stroke="#22C55E" stroke-width="0.8" opacity="0.3"/>
+          <line x1="70" y1="70" x2="70" y2="15" stroke="#22C55E" stroke-width="0.6" opacity="0.2"/>
+          <line x1="70" y1="70" x2="70" y2="125" stroke="#22C55E" stroke-width="0.6" opacity="0.2"/>
+          <line x1="30" y1="35" x2="110" y2="35" stroke="#22C55E" stroke-width="0.5" opacity="0.15"/>
+          <line x1="20" y1="90" x2="120" y2="90" stroke="#22C55E" stroke-width="0.5" opacity="0.15"/>
+          <line x1="70" y1="15" x2="30" y2="35" stroke="#22C55E" stroke-width="0.4" opacity="0.12"/>
+          <line x1="70" y1="15" x2="110" y2="35" stroke="#22C55E" stroke-width="0.4" opacity="0.12"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="stag">Profil Dev</div>
+  <div class="g2" style="margin-bottom:20px;">
+    <div class="profile-mock">
+      <div class="profile-cover"></div>
+      <div class="profile-body">
+        <div class="avatar-mock">OK</div>
+        <div style="font-family:'Black Ops One',sans-serif;font-size:14px;color:#fff;margin-bottom:4px;">Oktav Dev</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:8px;">Fullstack JS · AI Engineer · Red Team</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+          <span class="badge b-green">React</span>
+          <span class="badge b-green">Python</span>
+          <span class="badge b-muted">Three.js</span>
+        </div>
+        <div style="font-size:11px;color:var(--green-light);line-height:1.5;">Co-fondateur Excellence Team · Bénin</div>
+        <div class="div"></div>
+        <div style="display:flex;gap:16px;">
+          <div style="text-align:center;"><div style="font-family:'Black Ops One',sans-serif;font-size:14px;color:#fff;">12</div><div style="font-size:9px;color:var(--muted);">Projets</div></div>
+          <div style="text-align:center;"><div style="font-family:'Black Ops One',sans-serif;font-size:14px;color:var(--green);">1240</div><div style="font-size:9px;color:var(--muted);">XP</div></div>
+          <div style="text-align:center;"><div style="font-family:'Black Ops One',sans-serif;font-size:14px;color:#fff;">5</div><div style="font-size:9px;color:var(--muted);">Articles</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-mock">
+      <div class="article-thumb">
+        <div style="font-family:'Black Ops One',sans-serif;font-size:11px;color:var(--green);opacity:0.5;">ILLUSTRATION</div>
+      </div>
+      <div class="article-body">
+        <div style="display:flex;gap:6px;margin-bottom:8px;">
+          <span class="badge b-green">Tuto</span>
+          <span class="badge b-muted">React</span>
+        </div>
+        <div style="font-family:'Black Ops One',sans-serif;font-size:13px;color:#fff;margin-bottom:6px;line-height:1.3;">Déployer une app React sur Azure en 2025</div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:12px;">Par Oktav Dev · 18 mai 2026 · 5 min</div>
+        <div style="display:flex;gap:12px;">
+          <span style="font-size:10px;color:var(--muted);">❤ 42</span>
+          <span style="font-size:10px;color:var(--muted);">💬 8</span>
+          <span style="font-size:10px;color:var(--green);">→ Lire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== REGLES ====== -->
+<div id="regles" class="page">
+  <div class="stag">09 — Règles d'Usage</div>
+  <div class="ptitle">Faire <span>&amp; Ne Pas Faire</span></div>
+  <div class="psub">→ règles non-négociables pour la cohérence de la charte</div>
+
+  <div class="stag">Couleurs</div>
+  <div class="g2" style="margin-bottom:24px;">
+    <div>
+      <div class="rule-ok"><div class="rule-title">✓ Autorisé</div><div class="rule-text">Vert #22C55E sur fond dark #0A1A0D<br>Orange #F97316 pour CTA + accents UI<br>Vert clair #6EE7A0 pour textes secondaires<br>Toggle dark/light disponible sur tout le site</div></div>
+      <div class="rule-ok"><div class="rule-title">✓ Autorisé</div><div class="rule-text">Dot grid vert à 4% sur sections<br>Circuit organique dans le footer<br>Neurones interactifs dans le hero</div></div>
+    </div>
+    <div>
+      <div class="rule-no"><div class="rule-title">✗ Interdit</div><div class="rule-text">Utiliser orange et vert à parts égales (ratio 50/50)<br>Utiliser l'orange comme couleur dominante<br>Fond light hors palette (utiliser #F8FAFC pour le fond et #FFFFFF pour les cards)<br>Superposer les 3 motifs sur la même section</div></div>
+      <div class="rule-no"><div class="rule-title">✗ Interdit</div><div class="rule-text">Changer les couleurs du logo existant<br>Utiliser une couleur hors palette non validée<br>Opacité des motifs supérieure à 7%</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Typographie</div>
+  <div class="g2" style="margin-bottom:24px;">
+    <div>
+      <div class="rule-ok"><div class="rule-title">✓ Autorisé</div><div class="rule-text">Black Ops One pour H1, H2, H3, CTA et accroches<br>Syne 400–700 pour body, nav, labels<br>Mélanger les deux polices dans un même composant</div></div>
+    </div>
+    <div>
+      <div class="rule-no"><div class="rule-title">✗ Interdit</div><div class="rule-text">Black Ops One sur des paragraphes ou textes longs<br>Police tierce non validée (Inter, Roboto, Arial…)<br>Black Ops One en dessous de 11px (illisible)</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Illustrations & Photos</div>
+  <div class="g2" style="margin-bottom:24px;">
+    <div>
+      <div class="rule-ok"><div class="rule-title">✓ Autorisé</div><div class="rule-text">Photo réelle pour les profils membres<br>Mockup / screenshot 16:9 pour les projets<br>Illustration vectorielle tech pour les articles<br>Avatar initiales vert si pas de photo</div></div>
+    </div>
+    <div>
+      <div class="rule-no"><div class="rule-title">✗ Interdit</div><div class="rule-text">Photos stock génériques pour les articles<br>Images sans rapport avec la palette verte<br>Captures d'écran floues ou basse résolution<br>Visages réels non consentis dans les illustrations</div></div>
+    </div>
+  </div>
+
+  <div class="stag">Animations</div>
+  <div class="g2">
+    <div>
+      <div class="rule-ok"><div class="rule-title">✓ Autorisé</div><div class="rule-text">Reveal-left / right alternés au scroll<br>Pulse sur CTA (discret, max 2s cycle)<br>Neurones interactifs au hover/scroll dans le hero</div></div>
+    </div>
+    <div>
+      <div class="rule-no"><div class="rule-title">✗ Interdit</div><div class="rule-text">Animations de couleur flash ou clignotement<br>Scroll reveal sur chaque élément (surcharge)<br>Durée d'animation >800ms (ressenti lent)</div></div>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div style="text-align:center;padding:16px 0;">
+    <div style="font-family:'Black Ops One',sans-serif;font-size:11px;color:var(--green);letter-spacing:0.1em;margin-bottom:8px;">DEVBÉNIN · CHARTE GRAPHIQUE v1.0</div>
+    <div style="font-size:10px;color:var(--muted);">InnerBuild S02 · Phase 2 · Excellence Team · Mai 2026</div>
+  </div>
+</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyColor(hex,btn){
+  navigator.clipboard.writeText(hex).then(()=>{
+    btn.textContent='COPIÉ ✓';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='COPIER';btn.classList.remove('copied');},1500);
+  });
+}
+</script>
+</body>
+</html>

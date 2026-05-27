@@ -89,6 +89,27 @@ body {
 .border-orange-theme { border-color: var(--border-orange); }
 
 /* =====================================================
+   NAVBAR HOVER STYLES
+   ===================================================== */
+.nav-link {
+  color: var(--text-muted);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+.nav-link:hover {
+  color: var(--accent-orange);
+  background: var(--glow-orange);
+}
+
+.nav-dropdown-item {
+  color: var(--text-muted);
+  transition: color 150ms ease, background-color 150ms ease;
+}
+.nav-dropdown-item:hover {
+  color: var(--accent-orange);
+  background: var(--glow-orange);
+}
+
+/* =====================================================
    PATTERNS
    ===================================================== */
 .pattern-dots {

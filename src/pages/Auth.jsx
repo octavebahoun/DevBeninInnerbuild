@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Sparkles, Users, Trophy } from 'lucide-react';
+import { authStore } from '../lib/storage';
 
 export default function Auth({ defaultTab = 'login' }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   // Sync tab with route if it changes
   useEffect(() => {
@@ -27,15 +29,61 @@ export default function Auth({ defaultTab = 'login' }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
     setLoading(true);
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (activeTab === 'register') {
+      if (password !== confirmPassword) {
+        setLoading(false);
+        setError('Les mots de passe ne correspondent pas.');
+        return;
+      }
+      const result = authStore.createUser({
+        name,
+        email: normalizedEmail,
+        password,
+        techStack,
+      });
+      if (!result.ok) {
+        setLoading(false);
+        setError(result.error);
+        return;
+      }
+      authStore.setSession({
+        userId: result.user.id,
+        name: result.user.name,
+        email: result.user.email,
+      });
+      setTimeout(() => {
+        setLoading(false);
+        navigate('/');
+      }, 600);
+      return;
+    }
+
+    const result = authStore.validateUser(normalizedEmail, password);
+    if (!result.ok) {
+      setLoading(false);
+      setError(result.error);
+      return;
+    }
+    authStore.setSession({
+      userId: result.user.id,
+      name: result.user.name,
+      email: result.user.email,
+    });
     setTimeout(() => {
       setLoading(false);
       navigate('/');
-    }, 1200);
+    }, 600);
   };
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
+    setError('');
+    setLoading(false);
     if (tab === 'login') {
       navigate('/login');
     } else {
@@ -354,6 +402,19 @@ export default function Auth({ defaultTab = 'login' }) {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {error && (
+            <div
+              className="rounded-md px-3 py-2 text-[11px] font-medium"
+              style={{
+                background: 'var(--glow-orange)',
+                border: '1px solid var(--border-orange)',
+                color: 'var(--accent-orange)'
+              }}
+            >
+              {error}
+            </div>
+          )}
 
           {/* Submit button */}
           <button

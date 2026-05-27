@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import NeuronNetwork from './NeuronNetwork';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
-import heroImg from '../assets/hero.png';
+import heroImg from '../assets/benin.webp';
 
 export default function Hero() {
   const imgRef      = useRef(null);
@@ -166,14 +166,14 @@ export default function Hero() {
 
         {/* ════ RIGHT — Hero image ════ */}
         <div className="flex-1 flex items-center justify-center md:justify-end relative">
-          {/* Violet/purple glow behind image — matches image accent color */}
+          {/* Green/orange glow behind image — matches site palette */}
           <div
             ref={glowRef}
             className="absolute inset-0 m-auto rounded-full pointer-events-none"
             style={{
               width: '260px',
               height: '260px',
-              background: 'radial-gradient(ellipse, rgba(139,92,246,0.22) 0%, rgba(249,115,22,0.08) 55%, transparent 80%)',
+              background: 'radial-gradient(ellipse, var(--glow-orange) 0%, var(--glow-green) 55%, transparent 80%)',
               filter: 'blur(32px)',
             }}
           />
@@ -204,7 +204,7 @@ export default function Hero() {
             alt="DevBénin — plateforme tech béninoise"
             className="relative z-10 w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] select-none pointer-events-none"
             style={{
-              filter: 'drop-shadow(0 24px 48px rgba(139,92,246,0.35)) drop-shadow(0 8px 24px rgba(249,115,22,0.2))',
+              filter: 'drop-shadow(0 24px 48px rgba(34,197,94,0.3)) drop-shadow(0 8px 24px rgba(249,115,22,0.2))',
               opacity: 0, // GSAP will animate this in
             }}
             draggable={false}
