@@ -149,7 +149,7 @@ export function SectionHeader({ number, eyebrow, title, accent, className }) {
         </div>
       </ScrollReveal>
       <ScrollReveal variant="fadeUp" delay={0.1} duration={0.65}>
-        <h2 className="mt-3 font-display text-2xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
+        <h2 className="mt-3 text-h2" style={{ color: 'var(--text-main)' }}>
           {title}{' '}
           {accent && <span style={{ color: 'var(--accent-orange)' }}>{accent}</span>}
         </h2>

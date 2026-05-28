@@ -32,7 +32,7 @@ const NAV_LINKS = [
   {
     label: 'Communauté',
     children: [
-      { label: 'Membres',  href: '#community', icon: <Users    className="h-3.5 w-3.5" /> },
+      { label: 'Membres',  href: '/membres', icon: <Users    className="h-3.5 w-3.5" /> },
       { label: 'Projets',  href: '/projects',  icon: <Code2    className="h-3.5 w-3.5" /> },
       { label: 'Articles', href: '/articles', icon: <BookOpen className="h-3.5 w-3.5" /> },
     ],
@@ -197,7 +197,7 @@ export default function Navbar() {
         >
           {link.children.map(child => (
             <a key={child.label} href={child.href}
-              className="nav-dropdown-item flex items-center gap-2.5 px-4 py-2.5 text-xs font-medium"
+              className="nav-dropdown-item flex items-center gap-2.5 px-4 py-2.5 text-small font-medium"
               onClick={closeAll}
             >
               <span style={{ color: 'var(--accent-orange)' }}>{child.icon}</span>
@@ -235,7 +235,7 @@ export default function Navbar() {
                 <input ref={searchRef} type="text"
                   placeholder="Rechercher articles, devs, projets..."
                   value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                  className="flex-1 bg-transparent text-sm focus:outline-none"
+                  className="flex-1 bg-transparent text-body focus:outline-none"
                   style={{ color: 'var(--text-main)' }}
                 />
                 <button onClick={() => setSearchOpen(false)}>
@@ -250,14 +250,14 @@ export default function Navbar() {
                   if (!items.length) return null;
                   return (
                     <div key={type}>
-                      <div className="px-4 py-1.5 text-[9px] font-bold uppercase tracking-widest"
+                      <div className="px-4 py-1.5 text-stag"
                         style={{ color: TYPE_COLOR[type], background: 'var(--surface)' }}>
                         {TYPE_LABEL[type]}
                       </div>
                       {items.map(item => (
                         <a key={item.label} href={item.href}
                           onClick={() => setSearchOpen(false)}
-                          className="flex items-center gap-3 px-4 py-2.5 text-sm transition-colors duration-150"
+                          className="flex items-center gap-3 px-4 py-2.5 text-body transition-colors duration-150"
                           style={{ color: 'var(--text-main)' }}
                           onMouseEnter={e => e.currentTarget.style.background = 'var(--surface)'}
                           onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
@@ -271,7 +271,7 @@ export default function Navbar() {
                   );
                 })}
                 {filteredSearch.length === 0 && (
-                  <div className="py-10 text-center text-sm" style={{ color: 'var(--text-sub)' }}>
+                  <div className="py-10 text-center text-body" style={{ color: 'var(--text-sub)' }}>
                     Aucun résultat pour «&nbsp;{searchQuery}&nbsp;»
                   </div>
                 )}
@@ -308,7 +308,7 @@ export default function Navbar() {
                   className="flex h-14 items-center justify-between px-5 gap-3 whitespace-nowrap"
                 >
                   {/* Logo */}
-                  <Link to="/" className="font-display text-lg tracking-wider flex-shrink-0"
+                  <Link to="/" className="text-h3 tracking-wider flex-shrink-0"
                     style={{ color: 'var(--text-main)' }}>
                     Dev<span style={{ color: 'var(--accent-orange)' }}>Bénin</span>
                   </Link>
@@ -321,7 +321,7 @@ export default function Navbar() {
                         onMouseLeave={() => link.children && scheduleCloseDropdown()}
                       >
                         <a href={getHref(link.href)}
-                          className="nav-link flex items-center gap-1 rounded-lg px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider"
+                          className="nav-link flex items-center gap-1 rounded-lg px-3 py-1.5 text-small font-bold uppercase tracking-wider"
                           onClick={link.children ? e => e.preventDefault() : closeAll}
                         >
                           {link.label}
@@ -336,11 +336,11 @@ export default function Navbar() {
                   <div className="flex items-center gap-2 flex-shrink-0">
                     {/* Search */}
                     <button onClick={() => setSearchOpen(true)}
-                      className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs transition-all duration-200"
+                      className="flex items-center gap-2 rounded-lg px-3 py-1.5 text-small transition-all duration-200"
                       style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-sub)' }}
                     >
                       <Search className="h-3.5 w-3.5" style={{ color: 'var(--accent-orange)' }} />
-                      <span className="hidden md:block text-[11px]">Rechercher…</span>
+                      <span className="hidden md:block text-small">Rechercher…</span>
                     </button>
 
                     {/* Theme */}
@@ -355,7 +355,7 @@ export default function Navbar() {
                     {/* Dashboard / Connexion — desktop */}
                     {session ? (
                       <>
-                        <Link to="/dashboard" className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                        <Link to="/dashboard" className="hidden md:block text-small font-bold uppercase tracking-wider transition-colors duration-200"
                           style={{ color: 'var(--text-muted)' }}
                           onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
                           onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
@@ -364,14 +364,14 @@ export default function Navbar() {
                         </Link>
                         <button
                           onClick={handleLogout}
-                          className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                          className="hidden md:block text-small font-bold uppercase tracking-wider transition-colors duration-200"
                           style={{ color: 'var(--accent-orange)' }}
                         >
                           Deconnexion
                         </button>
                       </>
                     ) : (
-                      <Link to="/login" className="hidden md:block text-[11px] font-bold uppercase tracking-wider transition-colors duration-200"
+                      <Link to="/login" className="hidden md:block text-small font-bold uppercase tracking-wider transition-colors duration-200"
                         style={{ color: 'var(--text-muted)' }}
                         onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
                         onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
@@ -382,7 +382,7 @@ export default function Navbar() {
 
                     {/* CTA — desktop */}
                     {!session && (
-                      <Link to="/register" className="hidden md:block btn-orange rounded-lg px-4 py-1.5 font-display text-[11px] tracking-wider text-center">
+                      <Link to="/register" className="hidden md:block btn-orange rounded-lg px-4 py-1.5 text-cta text-center">
                         Rejoindre ↗
                       </Link>
                     )}
@@ -405,7 +405,7 @@ export default function Navbar() {
                   transition={{ duration: 0.15 }}
                   className="flex h-11 items-center justify-center gap-3 px-5"
                 >
-                  <Link to="/" className="font-display text-sm tracking-wider"
+                  <Link to="/" className="text-cta"
                     style={{ color: 'var(--text-main)' }}>
                     Dev<span style={{ color: 'var(--accent-orange)' }}>Bénin</span>
                   </Link>
@@ -441,7 +441,7 @@ export default function Navbar() {
                       <div className="flex flex-col gap-2">
                         <Link
                           to="/dashboard"
-                          className="flex items-center rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-150"
+                          className="flex items-center rounded-lg px-3 py-2 text-small font-bold uppercase tracking-wider transition-all duration-150"
                           style={{ color: 'var(--accent-orange)', background: 'var(--glow-orange)' }}
                           onClick={closeAll}
                         >
@@ -449,7 +449,7 @@ export default function Navbar() {
                         </Link>
                         <button
                           onClick={handleLogout}
-                          className="flex items-center justify-center rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-150"
+                          className="flex items-center justify-center rounded-lg px-3 py-2 text-small font-bold uppercase tracking-wider transition-all duration-150"
                           style={{ color: 'var(--accent-orange)', border: '1px solid var(--border-orange)' }}
                         >
                           Deconnexion
@@ -458,7 +458,7 @@ export default function Navbar() {
                     ) : (
                       <Link
                         to="/login"
-                        className="flex items-center rounded-lg px-3 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-150"
+                        className="flex items-center rounded-lg px-3 py-2 text-small font-bold uppercase tracking-wider transition-all duration-150"
                         style={{ color: 'var(--accent-orange)', background: 'var(--glow-orange)' }}
                         onClick={closeAll}
                       >
@@ -471,7 +471,7 @@ export default function Navbar() {
                     <div key={link.label}>
                       {!link.children ? (
                         <a href={getHref(link.href)} onClick={closeAll}
-                          className="flex items-center px-5 py-2.5 text-sm font-bold uppercase tracking-wider transition-all duration-150"
+                          className="flex items-center px-5 py-2.5 text-body font-bold uppercase tracking-wider transition-all duration-150"
                           style={{ color: 'var(--text-muted)' }}
                           onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
                           onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
@@ -480,13 +480,13 @@ export default function Navbar() {
                         </a>
                       ) : (
                         <>
-                          <div className="px-5 pt-2 pb-1 text-[9px] font-bold uppercase tracking-widest"
+                          <div className="px-5 pt-2 pb-1 text-stag"
                             style={{ color: 'var(--accent-orange)' }}>
                             {link.label}
                           </div>
                           {link.children.map(child => (
                             <a key={child.label} href={getHref(child.href)} onClick={closeAll}
-                              className="flex items-center gap-2.5 px-6 py-2 text-xs font-medium transition-all duration-150"
+                              className="flex items-center gap-2.5 px-6 py-2 text-small font-medium transition-all duration-150"
                               style={{ color: 'var(--text-sub)' }}
                               onMouseEnter={e => { e.currentTarget.style.color = 'var(--accent-orange)'; e.currentTarget.style.background = 'var(--glow-orange)'; }}
                               onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-sub)'; e.currentTarget.style.background = 'transparent'; }}
@@ -511,7 +511,7 @@ export default function Navbar() {
                         {theme === 'dark' ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
                       </button>
                       <button onClick={() => { setSearchOpen(true); closeAll(); }}
-                        className="flex-1 flex items-center gap-2 rounded-lg px-3 py-2 text-xs transition-all duration-200"
+                        className="flex-1 flex items-center gap-2 rounded-lg px-3 py-2 text-small transition-all duration-200"
                         style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-sub)' }}
                       >
                         <Search className="h-3.5 w-3.5 flex-shrink-0" style={{ color: 'var(--accent-orange)' }} />
@@ -520,11 +520,11 @@ export default function Navbar() {
                     </div>
                     {!session && (
                       <>
-                        <Link to="/login" onClick={closeAll} className="block w-full rounded-lg py-2 text-xs font-bold uppercase tracking-wider text-center mb-2 transition-all duration-200"
+                        <Link to="/login" onClick={closeAll} className="block w-full rounded-lg py-2 text-small font-bold uppercase tracking-wider text-center mb-2 transition-all duration-200"
                           style={{ border: '1px solid var(--border-col)', color: 'var(--text-muted)' }}>
                           Connexion
                         </Link>
-                        <Link to="/register" onClick={closeAll} className="block btn-orange w-full rounded-lg py-2 font-display text-xs tracking-wider text-center">
+                        <Link to="/register" onClick={closeAll} className="block btn-orange w-full rounded-lg py-2 text-cta text-center">
                           Rejoindre ↗
                         </Link>
                       </>

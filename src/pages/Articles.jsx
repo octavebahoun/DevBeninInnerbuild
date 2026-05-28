@@ -74,77 +74,77 @@ export default function Articles() {
             <div className="section-label"><span>01</span><span>Ressources &amp; Articles</span></div>
           </ScrollReveal>
           <ScrollReveal variant="fadeUp" delay={0.1}>
-            <h1 className="mt-3 font-display text-3xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
+            <h1 className="mt-3 text-h2" style={{ color: 'var(--text-main)' }}>
               Le Blog <span style={{ color: 'var(--accent-orange)' }}>Tech</span>
             </h1>
           </ScrollReveal>
-          <p className="mt-3 text-sm max-w-xl" style={{ color: 'var(--text-sub)' }}>
+          <p className="mt-3 text-body max-w-xl" style={{ color: 'var(--text-sub)' }}>
             Retrouvez les tutoriels, retours d'experience et actus de l'ecosysteme.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
           <div className="lg:col-span-2 rounded-lg p-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
-            <div className="text-xs font-semibold" style={{ color: 'var(--text-main)' }}>Publier un article</div>
-            <p className="mt-2 text-[11px]" style={{ color: 'var(--text-sub)' }}>
+            <div className="text-small font-semibold" style={{ color: 'var(--text-main)' }}>Publier un article</div>
+            <p className="mt-2 text-small" style={{ color: 'var(--text-sub)' }}>
               Partagez vos retours d'experience, tutoriels ou insights.
             </p>
             <form className="mt-4 space-y-3" onSubmit={handleCreate}>
               <div>
-                <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Titre</label>
+                <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Titre</label>
                 <input
                   value={formData.title}
                   onChange={(event) => setFormData((prev) => ({ ...prev, title: event.target.value }))}
-                  className="mt-1 w-full rounded px-3 py-2 text-xs"
+                  className="mt-1 w-full rounded px-3 py-2 text-small"
                   style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Categorie</label>
+                <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Categorie</label>
                 <input
                   value={formData.category}
                   onChange={(event) => setFormData((prev) => ({ ...prev, category: event.target.value }))}
-                  className="mt-1 w-full rounded px-3 py-2 text-xs"
+                  className="mt-1 w-full rounded px-3 py-2 text-small"
                   style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Tags (separes par des virgules)</label>
+                <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Tags (separes par des virgules)</label>
                 <input
                   value={formData.tags}
                   onChange={(event) => setFormData((prev) => ({ ...prev, tags: event.target.value }))}
-                  className="mt-1 w-full rounded px-3 py-2 text-xs"
+                  className="mt-1 w-full rounded px-3 py-2 text-small"
                   placeholder="React, Tuto, UX"
                   style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                 />
               </div>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Temps de lecture</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Temps de lecture</label>
                   <input
                     value={formData.readTime}
                     onChange={(event) => setFormData((prev) => ({ ...prev, readTime: event.target.value }))}
-                    className="mt-1 w-full rounded px-3 py-2 text-xs"
+                    className="mt-1 w-full rounded px-3 py-2 text-small"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Auteur</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Auteur</label>
                   <input
                     value={session?.name || 'Anonyme'}
                     readOnly
-                    className="mt-1 w-full rounded px-3 py-2 text-xs"
+                    className="mt-1 w-full rounded px-3 py-2 text-small"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-sub)' }}
                   />
                 </div>
               </div>
               <div>
-                <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Description</label>
+                <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Description</label>
                 <textarea
                   rows={4}
                   value={formData.preview}
                   onChange={(event) => setFormData((prev) => ({ ...prev, preview: event.target.value }))}
-                  className="mt-1 w-full rounded px-3 py-2 text-xs"
+                  className="mt-1 w-full rounded px-3 py-2 text-small"
                   style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                 />
               </div>
@@ -169,8 +169,8 @@ export default function Articles() {
           </div>
 
           <div className="rounded-lg p-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
-            <div className="text-xs font-semibold" style={{ color: 'var(--text-main)' }}>Conseils rapides</div>
-            <ul className="mt-3 space-y-2 text-[11px]" style={{ color: 'var(--text-sub)' }}>
+            <div className="text-small font-semibold" style={{ color: 'var(--text-main)' }}>Conseils rapides</div>
+            <ul className="mt-3 space-y-2 text-small" style={{ color: 'var(--text-sub)' }}>
               <li>Un titre clair et une promesse concrete.</li>
               <li>Ajoutez 2 a 4 tags pour etre visible.</li>
               <li>Gardez un resume court et direct.</li>
@@ -183,7 +183,7 @@ export default function Articles() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className="rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider transition-all duration-200"
+              className="rounded-full px-4 py-1.5 text-small font-semibold tracking-wider transition-all duration-200"
               style={
                 activeCategory === cat
                   ? {
@@ -218,7 +218,7 @@ export default function Articles() {
                 style={{ background: 'linear-gradient(135deg, var(--surface) 0%, var(--glow-orange) 100%)' }}
               >
                 <span
-                  className="font-display text-[10px] font-bold uppercase tracking-widest"
+                  className="font-display text-stag"
                   style={{ color: 'var(--accent-orange)' }}
                 >
                   {art.category}
@@ -242,10 +242,10 @@ export default function Articles() {
                   ))}
                 </div>
 
-                <h2 className="font-display text-base sm:text-lg" style={{ color: 'var(--text-main)' }}>
+                <h2 className="font-display text-body sm:text-lg" style={{ color: 'var(--text-main)' }}>
                   {art.title}
                 </h2>
-                <p className="mt-3 text-xs leading-relaxed" style={{ color: 'var(--text-sub)' }}>
+                <p className="mt-3 text-small leading-relaxed" style={{ color: 'var(--text-sub)' }}>
                   {art.preview}
                 </p>
 

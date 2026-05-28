@@ -3,11 +3,13 @@ import NeuronNetwork from './NeuronNetwork';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import heroImg from '../assets/benin.webp';
+import { useNavigate } from 'react-router-dom';
 
 export default function Hero() {
   const imgRef      = useRef(null);
   const glowRef     = useRef(null);
   const floatTlRef  = useRef(null);
+  const navigate    = useNavigate();
 
   /* ── GSAP animations on mount ── */
   useEffect(() => {
@@ -85,8 +87,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 backdrop-blur-sm mb-6"
+            className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 backdrop-blur-sm mb-6 cursor-pointer hover:border-[var(--accent-green)] transition-all duration-200"
             style={{ border: '1px solid var(--border-orange)', background: 'var(--glow-orange)' }}
+            onClick={() => navigate('/challenges')}
           >
             <span className="relative flex h-2 w-2">
               <span
@@ -95,8 +98,8 @@ export default function Hero() {
               />
               <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: 'var(--accent-orange)' }} />
             </span>
-            <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: 'var(--accent-orange)' }}>
-              🇧🇯 Communauté Tech Béninoise
+            <span className="text-stag" style={{ color: 'var(--accent-orange)' }}>
+              🔥 [Nouveau] Challenges de Quiz hebdomadaires
             </span>
           </motion.div>
 
@@ -105,15 +108,13 @@ export default function Hero() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]"
+            className="text-h1"
             style={{ color: 'var(--text-main)' }}
           >
-            CONSTRUISONS<br />
-            L'AVENIR{' '}
-            <span style={{ color: 'var(--accent-orange)' }}>TECH</span>
-            <br />
+            Construisons l'avenir<br />
+            <span style={{ color: 'var(--accent-orange)' }}>Tech</span> du Bénin<br />
             <span style={{ color: 'var(--accent-green)', opacity: 0.65 }} className="font-light">
-              DU BÉNIN
+              ensemble
             </span>
           </motion.h1>
 
@@ -122,7 +123,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-6 max-w-lg text-sm sm:text-base font-medium leading-relaxed mx-auto md:mx-0"
+            className="mt-6 max-w-lg text-body mx-auto md:mx-0"
             style={{ color: 'var(--text-sub)' }}
           >
             La plus grande communauté de développeurs au Bénin. Apprenez, partagez vos connaissances
@@ -136,10 +137,16 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-8 flex flex-wrap items-center justify-center md:justify-start gap-4"
           >
-            <button className="btn-orange rounded-md px-7 py-3.5 font-display text-sm tracking-wider">
-              Rejoindre l'Élite ↗
+            <button 
+              className="btn-orange rounded-md px-7 py-3.5 text-cta"
+              onClick={() => navigate('/register')}
+            >
+              Rejoindre l'élite ↗
             </button>
-            <button className="btn-outline-orange rounded-md px-7 py-3.5 font-semibold text-sm">
+            <button 
+              className="btn-outline-orange rounded-md px-7 py-3.5 text-small font-semibold"
+              onClick={() => navigate('/projects')}
+            >
               Voir les projets →
             </button>
           </motion.div>
@@ -157,8 +164,8 @@ export default function Hero() {
               { val: '30+',  label: 'Challenges réalisés' },
             ].map(({ val, label }) => (
               <div key={label} className="text-center md:text-left">
-                <div className="font-display text-2xl font-bold" style={{ color: 'var(--accent-orange)' }}>{val}</div>
-                <div className="text-[10px] uppercase tracking-widest mt-0.5" style={{ color: 'var(--text-sub)' }}>{label}</div>
+                <div className="text-h2" style={{ color: 'var(--accent-orange)' }}>{val}</div>
+                <div className="text-stag mt-1" style={{ color: 'var(--text-sub)' }}>{label}</div>
               </div>
             ))}
           </motion.div>

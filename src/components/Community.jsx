@@ -74,13 +74,17 @@ export default function Community() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <ScrollReveal variant="fadeLeft" duration={0.5}>
-              <div className="section-label"><span>04</span><span>Annuaire des membres</span></div>
+              <div className="section-label"><span>05</span><span>Membres &amp; Mentors</span></div>
             </ScrollReveal>
             <ScrollReveal variant="fadeUp" delay={0.1}>
-              <h2 data-gsap-title className="mt-3 font-display text-2xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
-                La Communauté{' '}
-                <span style={{ color: 'var(--accent-orange)' }}>Active</span>
+              <h2 data-gsap-title className="mt-3 text-h2" style={{ color: 'var(--text-main)' }}>
+                Top Talents &amp; <span style={{ color: 'var(--accent-orange)' }}>Mentors</span>
               </h2>
+            </ScrollReveal>
+            <ScrollReveal variant="fadeUp" delay={0.2}>
+              <p className="mt-4 text-body max-w-2xl font-light" style={{ color: 'var(--text-sub)' }}>
+                Rencontrez les développeurs expérimentés et mentors qui façonnent l'avenir de la tech au Bénin.
+              </p>
             </ScrollReveal>
           </div>
 
@@ -92,7 +96,7 @@ export default function Community() {
               placeholder="Rechercher un membre..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded px-3.5 py-2 pl-9 text-xs focus:outline-none transition-all duration-300"
+              className="w-full rounded px-3.5 py-2 pl-9 text-small focus:outline-none transition-all duration-300"
               style={{
                 background: 'var(--card-bg)',
                 border: '1px solid var(--border-col)',
@@ -110,7 +114,7 @@ export default function Community() {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className="rounded-full px-4 py-1.5 text-xs font-semibold tracking-wider transition-all duration-200"
+              className="rounded-full px-4 py-1.5 text-small font-semibold tracking-wider transition-all duration-200"
               style={
                 activeFilter === filter
                   ? {
@@ -142,7 +146,7 @@ export default function Community() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.2 }}
-                className="overflow-hidden rounded-lg flex flex-col justify-between transition-all duration-300"
+                className="overflow-hidden rounded-2xl flex flex-col justify-between transition-all duration-300"
                 style={{
                   backgroundColor: 'var(--card-bg)',
                   border: '1px solid var(--border-col)'
@@ -162,7 +166,7 @@ export default function Community() {
                 <div className="px-5 pb-5">
                   {/* Avatar */}
                   <div
-                    className="relative -mt-6 mb-3 flex h-12 w-12 items-center justify-center rounded-full font-display text-sm font-bold"
+                    className="relative -mt-6 mb-3 flex h-12 w-12 items-center justify-center rounded-full font-display text-body font-bold"
                     style={{
                       border: '2px solid var(--bg)',
                       background: 'var(--accent-orange)',
@@ -185,7 +189,7 @@ export default function Community() {
                   </div>
 
                   {/* Info */}
-                  <h3 className="font-display text-sm font-semibold tracking-wider" style={{ color: 'var(--text-main)' }}>
+                  <h3 className="font-display text-body font-semibold tracking-wider" style={{ color: 'var(--text-main)' }}>
                     {member.name}
                   </h3>
 
@@ -221,7 +225,7 @@ export default function Community() {
                   {/* Stats */}
                   <div className="flex justify-between text-center">
                     <div>
-                      <div className="font-display text-xs font-bold" style={{ color: 'var(--text-main)' }}>
+                      <div className="font-display text-small font-bold" style={{ color: 'var(--text-main)' }}>
                         {member.projects}
                       </div>
                       <div className="text-[8px] uppercase tracking-wider font-medium" style={{ color: 'var(--text-sub)' }}>
@@ -229,7 +233,7 @@ export default function Community() {
                       </div>
                     </div>
                     <div>
-                      <div className="font-display text-xs font-bold" style={{ color: 'var(--accent-orange)' }}>
+                      <div className="font-display text-small font-bold" style={{ color: 'var(--accent-orange)' }}>
                         {member.xp}
                       </div>
                       <div className="text-[8px] uppercase tracking-wider font-medium" style={{ color: 'var(--text-sub)' }}>
@@ -237,7 +241,7 @@ export default function Community() {
                       </div>
                     </div>
                     <div>
-                      <div className="font-display text-xs font-bold" style={{ color: 'var(--text-main)' }}>
+                      <div className="font-display text-small font-bold" style={{ color: 'var(--text-main)' }}>
                         {member.articles}
                       </div>
                       <div className="text-[8px] uppercase tracking-wider font-medium" style={{ color: 'var(--text-sub)' }}>
@@ -257,7 +261,7 @@ export default function Community() {
             className="text-center py-12 rounded"
             style={{ border: '1px dashed var(--border-col)', background: 'var(--card-bg)' }}
           >
-            <p className="text-xs" style={{ color: 'var(--text-sub)' }}>
+            <p className="text-small" style={{ color: 'var(--text-sub)' }}>
               Aucun membre ne correspond à votre recherche.
             </p>
           </div>

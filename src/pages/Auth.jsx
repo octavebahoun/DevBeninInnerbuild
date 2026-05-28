@@ -112,7 +112,7 @@ export default function Auth({ defaultTab = 'login' }) {
         />
 
         {/* Top brand */}
-        <Link to="/" className="font-display text-2xl font-bold tracking-wider inline-flex items-center gap-3">
+        <Link to="/" className="text-h2 font-bold tracking-wider inline-flex items-center gap-3">
           <svg className="w-8 h-8 text-[var(--accent-orange)]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path 
               d="M25 20C25 20 45 10 65 25C85 40 75 70 55 75C35 80 20 60 35 45C50 30 75 50 65 65" 
@@ -139,7 +139,7 @@ export default function Auth({ defaultTab = 'login' }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-sm leading-relaxed"
+            className="text-body leading-relaxed"
             style={{ color: 'var(--text-sub)' }}
           >
             Participez à des challenges réguliers, progressez dans le classement national, et connectez-vous avec d'autres développeurs passionnés de l'écosystème.
@@ -152,8 +152,8 @@ export default function Auth({ defaultTab = 'login' }) {
                 <Trophy className="h-4 w-4" style={{ color: 'var(--accent-orange)' }} />
               </div>
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider">Challenges &amp; Hacks</h4>
-                <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Des défis mensuels pour tester vos compétences réelles.</p>
+                <h4 className="text-small font-bold uppercase tracking-wider">Challenges &amp; Hacks</h4>
+                <p className="text-small" style={{ color: 'var(--text-muted)' }}>Des défis mensuels pour tester vos compétences réelles.</p>
               </div>
             </div>
             <div className="flex items-center gap-3.5">
@@ -161,8 +161,8 @@ export default function Auth({ defaultTab = 'login' }) {
                 <Users className="h-4 w-4" style={{ color: 'var(--accent-green)' }} />
               </div>
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider">Réseautage &amp; Collaboration</h4>
-                <p className="text-[11px]" style={{ color: 'var(--text-muted)' }}>Trouvez des collaborateurs pour vos projets open source.</p>
+                <h4 className="text-small font-bold uppercase tracking-wider">Réseautage &amp; Collaboration</h4>
+                <p className="text-small" style={{ color: 'var(--text-muted)' }}>Trouvez des collaborateurs pour vos projets open source.</p>
               </div>
             </div>
           </div>
@@ -204,7 +204,7 @@ export default function Auth({ defaultTab = 'login' }) {
         </div>
 
         {/* Brand Name */}
-        <h1 className="font-display text-xl font-bold tracking-wider" style={{ color: 'var(--text-main)' }}>
+        <h1 className="text-h3 font-bold tracking-wider" style={{ color: 'var(--text-main)' }}>
           Dev<span style={{ color: 'var(--accent-orange)' }}>Bénin</span>
         </h1>
         <p className="text-[9px] uppercase tracking-widest font-semibold mt-1" style={{ color: 'var(--text-muted)' }}>
@@ -222,7 +222,7 @@ export default function Auth({ defaultTab = 'login' }) {
         >
           <button
             onClick={() => handleTabChange('login')}
-            className="flex-1 py-2 text-xs font-semibold rounded-full transition-all duration-300 relative"
+            className="flex-1 py-2 text-small font-semibold rounded-full transition-all duration-300 relative"
             style={{ color: activeTab === 'login' ? '#ffffff' : 'var(--text-muted)' }}
           >
             {activeTab === 'login' && (
@@ -238,7 +238,7 @@ export default function Auth({ defaultTab = 'login' }) {
 
           <button
             onClick={() => handleTabChange('register')}
-            className="flex-1 py-2 text-xs font-semibold rounded-full transition-all duration-300 relative"
+            className="flex-1 py-2 text-small font-semibold rounded-full transition-all duration-300 relative"
             style={{ color: activeTab === 'register' ? '#ffffff' : 'var(--text-muted)' }}
           >
             {activeTab === 'register' && (
@@ -276,7 +276,7 @@ export default function Auth({ defaultTab = 'login' }) {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Ex: John Doe"
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all"
                     style={{ borderColor: 'var(--border-col)' }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-orange)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--border-col)'}
@@ -294,7 +294,7 @@ export default function Auth({ defaultTab = 'login' }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="nom@exemple.com"
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all"
                     style={{ borderColor: 'var(--border-col)' }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-orange)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--border-col)'}
@@ -309,7 +309,7 @@ export default function Auth({ defaultTab = 'login' }) {
                   <select
                     value={techStack}
                     onChange={(e) => setTechStack(e.target.value)}
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all cursor-pointer"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all cursor-pointer"
                     style={{ borderColor: 'var(--border-col)', colorScheme: 'dark' }}
                   >
                     <option value="Frontend" className="bg-neutral-900 text-white">Frontend (React, Vue)</option>
@@ -330,7 +330,7 @@ export default function Auth({ defaultTab = 'login' }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all"
                     style={{ borderColor: 'var(--border-col)' }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-orange)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--border-col)'}
@@ -348,7 +348,7 @@ export default function Auth({ defaultTab = 'login' }) {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all"
                     style={{ borderColor: 'var(--border-col)' }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-orange)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--border-col)'}
@@ -375,7 +375,7 @@ export default function Auth({ defaultTab = 'login' }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="nom@exemple.com"
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all"
                     style={{ borderColor: 'var(--border-col)' }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-orange)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--border-col)'}
@@ -393,7 +393,7 @@ export default function Auth({ defaultTab = 'login' }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••••••"
-                    className="w-full bg-transparent border-b py-2 text-sm text-current focus:outline-none transition-all"
+                    className="w-full bg-transparent border-b py-2 text-body text-current focus:outline-none transition-all"
                     style={{ borderColor: 'var(--border-col)' }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-orange)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--border-col)'}
@@ -405,7 +405,7 @@ export default function Auth({ defaultTab = 'login' }) {
 
           {error && (
             <div
-              className="rounded-md px-3 py-2 text-[11px] font-medium"
+              className="rounded-md px-3 py-2 text-small font-medium"
               style={{
                 background: 'var(--glow-orange)',
                 border: '1px solid var(--border-orange)',
@@ -420,7 +420,7 @@ export default function Auth({ defaultTab = 'login' }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full btn-orange py-3 rounded-full text-xs font-semibold tracking-wider hover:opacity-90 transition-opacity mt-8 flex items-center justify-center gap-2"
+            className="w-full btn-orange py-3 rounded-full text-small font-semibold tracking-wider hover:opacity-90 transition-opacity mt-8 flex items-center justify-center gap-2"
           >
             {loading ? (
               <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -433,7 +433,7 @@ export default function Auth({ defaultTab = 'login' }) {
         {/* Back Link */}
         <Link 
           to="/" 
-          className="mt-8 text-[11px] hover:opacity-80 transition-opacity"
+          className="mt-8 text-small hover:opacity-80 transition-opacity"
           style={{ color: 'var(--text-muted)' }}
         >
           ← Retour à l'accueil

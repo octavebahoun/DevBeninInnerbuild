@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Hero from '../components/Hero';
 import About from '../components/About';
-import Features from '../components/Features';
+import HomeProjects from '../components/HomeProjects';
 import Challenges from '../components/Challenges';
 import Community from '../components/Community';
 import Blog from '../components/Blog';
@@ -104,10 +104,10 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <Features />
+      <Blog />
+      <HomeProjects />
       <Challenges />
       <Community />
-      <Blog />
       <CTA />
     </>
   );

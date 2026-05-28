@@ -26,7 +26,7 @@ export default function ProjectDetail() {
             style={{ color: 'var(--accent-orange)' }}>
             <ArrowLeft className="h-3.5 w-3.5" /> Retour aux projets
           </Link>
-          <div className="mt-6 rounded-lg px-4 py-3 text-xs" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
+          <div className="mt-6 rounded-lg px-4 py-3 text-small" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
             Projet introuvable.
           </div>
         </div>
@@ -68,16 +68,16 @@ export default function ProjectDetail() {
         <div className="mt-6 rounded-lg p-6" style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <div className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>
+              <div className="text-stag" style={{ color: 'var(--text-sub)' }}>
                 {project.category} · {project.status}
               </div>
-              <h1 className="mt-2 font-display text-2xl sm:text-3xl" style={{ color: 'var(--text-main)' }}>
+              <h1 className="mt-2 text-h2" style={{ color: 'var(--text-main)' }}>
                 {project.title}
               </h1>
             </div>
             <button
               onClick={handleLike}
-              className="flex items-center gap-2 text-xs font-semibold"
+              className="flex items-center gap-2 text-small font-semibold"
               style={{ color: isLiked ? 'var(--accent-orange)' : 'var(--text-sub)' }}
             >
               <Heart
@@ -88,7 +88,7 @@ export default function ProjectDetail() {
             </button>
           </div>
 
-          <p className="mt-4 text-sm leading-relaxed" style={{ color: 'var(--text-sub)' }}>
+          <p className="mt-4 text-body leading-relaxed" style={{ color: 'var(--text-sub)' }}>
             {project.description}
           </p>
 
@@ -119,23 +119,23 @@ export default function ProjectDetail() {
 
         <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 text-xs font-semibold" style={{ color: 'var(--text-sub)' }}>
+            <div className="flex items-center gap-2 text-small font-semibold" style={{ color: 'var(--text-sub)' }}>
               <MessageSquare className="h-4 w-4" /> {project.comments.length} commentaires
             </div>
 
             <div className="mt-4 space-y-4">
               {project.comments.length === 0 ? (
-                <div className="rounded-lg px-4 py-3 text-xs" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
+                <div className="rounded-lg px-4 py-3 text-small" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
                   Aucun commentaire pour le moment.
                 </div>
               ) : (
                 project.comments.map((comment) => (
                   <div key={comment.id} className="rounded-lg p-4" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
-                    <div className="text-xs font-semibold" style={{ color: 'var(--text-main)' }}>{comment.author}</div>
+                    <div className="text-small font-semibold" style={{ color: 'var(--text-main)' }}>{comment.author}</div>
                     <div className="text-[10px]" style={{ color: 'var(--text-sub)' }}>
                       {new Date(comment.createdAt).toLocaleDateString('fr-FR')}
                     </div>
-                    <p className="mt-2 text-xs" style={{ color: 'var(--text-sub)' }}>{comment.message}</p>
+                    <p className="mt-2 text-small" style={{ color: 'var(--text-sub)' }}>{comment.message}</p>
                   </div>
                 ))
               )}
@@ -143,28 +143,52 @@ export default function ProjectDetail() {
           </div>
 
           <div>
-            <div className="rounded-lg p-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
-              <div className="text-xs font-semibold" style={{ color: 'var(--text-main)' }}>Nouveau post</div>
-              <p className="mt-2 text-[11px]" style={{ color: 'var(--text-sub)' }}>
+            {/* Owner Profile Card */}
+            {project.owner && (
+              <div className="rounded-2xl p-6 mb-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
+                <span className="text-[8px] font-bold uppercase tracking-widest text-[var(--accent-orange)] block mb-4">Porteur du projet</span>
+                <div className="flex items-center gap-4">
+                  <img 
+                    src={
+                      project.owner === 'Oktav Dev' ? 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=256&h=256&q=80' :
+                      project.owner === 'Precieux Dev' ? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&h=256&q=80' :
+                      project.owner === 'Ronald Hounnou' ? 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=256&h=256&q=80' :
+                      project.owner === 'Amina Bello' ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&h=256&q=80' :
+                      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"
+                    } 
+                    alt={project.owner} 
+                    className="w-12 h-12 rounded-xl object-cover border border-white/10"
+                  />
+                  <div>
+                    <div className="text-body font-black" style={{ color: 'var(--text-main)' }}>{project.owner}</div>
+                    <div className="text-[10px] font-mono mt-0.5" style={{ color: 'var(--text-sub)' }}>{project.ownerEmail}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <div className="rounded-2xl p-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
+              <div className="text-small font-semibold" style={{ color: 'var(--text-main)' }}>Nouveau post</div>
+              <p className="mt-2 text-small" style={{ color: 'var(--text-sub)' }}>
                 Partagez un retour, une idee ou un update sur le projet.
               </p>
               <form className="mt-4 space-y-3" onSubmit={handleSubmit}>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Nom</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Nom</label>
                   <input
                     value={author}
                     onChange={(event) => setAuthor(event.target.value)}
-                    className="mt-1 w-full rounded px-3 py-2 text-xs"
+                    className="mt-1 w-full rounded px-3 py-2 text-small"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Message</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Message</label>
                   <textarea
                     value={message}
                     onChange={(event) => setMessage(event.target.value)}
                     rows={4}
-                    className="mt-1 w-full rounded px-3 py-2 text-xs"
+                    className="mt-1 w-full rounded px-3 py-2 text-small"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                   />
                 </div>

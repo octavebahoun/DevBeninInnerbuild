@@ -24,7 +24,7 @@ export default function Features() {
             <div className="section-label"><span>02</span><span>Services &amp; Outils</span></div>
           </ScrollReveal>
           <ScrollReveal variant="fadeUp" delay={0.1}>
-            <h2 data-gsap-title className="mt-3 font-display text-2xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
+            <h2 data-gsap-title className="mt-3 text-h2" style={{ color: 'var(--text-main)' }}>
               Ce que propose <span style={{ color: 'var(--accent-orange)' }}>la Plateforme</span>
             </h2>
           </ScrollReveal>
@@ -39,7 +39,7 @@ export default function Features() {
           {featuresList.map((item, i) => (
             <StaggerItem key={i} variant="scaleUp">
               <div
-                className="group rounded-lg p-6 flex flex-col justify-between transition-all duration-300 cursor-default h-full"
+                className="group rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 cursor-default h-full"
                 style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-col)' }}
                 onMouseEnter={e => e.currentTarget.style.borderColor = item.accent}
                 onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border-col)'}
@@ -49,11 +49,11 @@ export default function Features() {
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)' }}>
                     {item.icon}
                   </div>
-                  <h3 className="font-display text-sm font-semibold uppercase tracking-wider transition-colors duration-200"
+                  <h3 className="font-display text-body font-semibold uppercase tracking-wider transition-colors duration-200"
                     style={{ color: 'var(--text-main)' }}>
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-xs leading-relaxed font-light" style={{ color: 'var(--text-sub)' }}>
+                  <p className="mt-2 text-small leading-relaxed font-light" style={{ color: 'var(--text-sub)' }}>
                     {item.desc}
                   </p>
                 </div>

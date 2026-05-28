@@ -108,11 +108,11 @@ export default function Dashboard() {
               <div className="section-label"><span>01</span><span>Mon espace</span></div>
             </ScrollReveal>
             <ScrollReveal variant="fadeUp" delay={0.1}>
-              <h1 className="mt-3 font-display text-3xl sm:text-4xl" style={{ color: 'var(--text-main)' }}>
+              <h1 className="mt-3 text-h2" style={{ color: 'var(--text-main)' }}>
                 Tableau de bord <span style={{ color: 'var(--accent-orange)' }}>{user.name}</span>
               </h1>
             </ScrollReveal>
-            <p className="mt-3 text-sm max-w-xl" style={{ color: 'var(--text-sub)' }}>
+            <p className="mt-3 text-body max-w-xl" style={{ color: 'var(--text-sub)' }}>
               Resume de votre activite, progression et gestion de compte.
             </p>
           </div>
@@ -124,11 +124,11 @@ export default function Dashboard() {
                   <User className="h-4 w-4" style={{ color: 'var(--accent-orange)' }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Profil</div>
-                  <div className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>{user.name}</div>
+                  <div className="text-stag" style={{ color: 'var(--text-sub)' }}>Profil</div>
+                  <div className="text-body font-semibold" style={{ color: 'var(--text-main)' }}>{user.name}</div>
                 </div>
               </div>
-              <div className="mt-4 text-xs" style={{ color: 'var(--text-sub)' }}>{user.email}</div>
+              <div className="mt-4 text-small" style={{ color: 'var(--text-sub)' }}>{user.email}</div>
               <div className="mt-2 inline-flex rounded-full px-3 py-1 text-[10px] font-semibold"
                 style={{ background: 'var(--glow-green)', border: '1px solid var(--border-col)', color: 'var(--accent-green)' }}>
                 {user.techStack}
@@ -141,8 +141,8 @@ export default function Dashboard() {
                   <Code2 className="h-4 w-4" style={{ color: 'var(--accent-green)' }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Mes projets</div>
-                  <div className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>{myProjects.length} actifs</div>
+                  <div className="text-stag" style={{ color: 'var(--text-sub)' }}>Mes projets</div>
+                  <div className="text-body font-semibold" style={{ color: 'var(--text-main)' }}>{myProjects.length} actifs</div>
                 </div>
               </div>
               <div className="mt-4 text-[10px]" style={{ color: 'var(--text-sub)' }}>
@@ -160,8 +160,8 @@ export default function Dashboard() {
                   <TrendingUp className="h-4 w-4" style={{ color: 'var(--accent-green)' }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Progression</div>
-                  <div className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>Niveau 4</div>
+                  <div className="text-stag" style={{ color: 'var(--text-sub)' }}>Progression</div>
+                  <div className="text-body font-semibold" style={{ color: 'var(--text-main)' }}>Niveau 4</div>
                 </div>
               </div>
               <div className="mt-4">
@@ -184,8 +184,8 @@ export default function Dashboard() {
                   <BookOpen className="h-4 w-4" style={{ color: 'var(--accent-orange)' }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Articles</div>
-                  <div className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>{myArticles.length} publies</div>
+                  <div className="text-stag" style={{ color: 'var(--text-sub)' }}>Articles</div>
+                  <div className="text-body font-semibold" style={{ color: 'var(--text-main)' }}>{myArticles.length} publies</div>
                 </div>
               </div>
               <div className="mt-4 text-[10px]" style={{ color: 'var(--text-sub)' }}>
@@ -201,12 +201,12 @@ export default function Dashboard() {
           <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
             <div className="lg:col-span-2 rounded-lg p-6" style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
               <div className="flex items-center justify-between">
-                <h2 className="font-display text-lg" style={{ color: 'var(--text-main)' }}>Mes articles</h2>
+                <h2 className="text-h3" style={{ color: 'var(--text-main)' }}>Mes articles</h2>
                 <span className="text-[10px]" style={{ color: 'var(--text-sub)' }}>{myArticles.length} article(s)</span>
               </div>
 
               {myArticles.length === 0 ? (
-                <div className="mt-6 rounded-md px-4 py-3 text-xs" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
+                <div className="mt-6 rounded-md px-4 py-3 text-small" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
                   Aucun article publie pour le moment. Partagez vos retours d'experience pour apparaitre ici.
                 </div>
               ) : (
@@ -215,7 +215,7 @@ export default function Dashboard() {
                     <div key={article.id} className="rounded-lg p-4" style={{ background: 'var(--surface)', border: '1px solid var(--border-col)' }}>
                       <div className="flex items-center justify-between gap-3">
                         <div>
-                          <div className="text-xs font-semibold" style={{ color: 'var(--text-main)' }}>{article.title}</div>
+                          <div className="text-small font-semibold" style={{ color: 'var(--text-main)' }}>{article.title}</div>
                           <div className="text-[10px] mt-1" style={{ color: 'var(--text-sub)' }}>{article.date} · {article.readTime}</div>
                         </div>
                         <span className="rounded-full px-2.5 py-1 text-[9px] font-semibold"
@@ -223,7 +223,7 @@ export default function Dashboard() {
                           {article.category}
                         </span>
                       </div>
-                      <p className="mt-3 text-xs" style={{ color: 'var(--text-sub)' }}>{article.preview}</p>
+                      <p className="mt-3 text-small" style={{ color: 'var(--text-sub)' }}>{article.preview}</p>
                     </div>
                   ))}
                 </div>
@@ -236,37 +236,37 @@ export default function Dashboard() {
                   <Settings className="h-4 w-4" style={{ color: 'var(--accent-green)' }} />
                 </div>
                 <div>
-                  <div className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Compte</div>
-                  <div className="text-sm font-semibold" style={{ color: 'var(--text-main)' }}>Parametres</div>
+                  <div className="text-stag" style={{ color: 'var(--text-sub)' }}>Compte</div>
+                  <div className="text-body font-semibold" style={{ color: 'var(--text-main)' }}>Parametres</div>
                 </div>
               </div>
 
-              <form className="mt-6 space-y-4 text-xs" onSubmit={handleSave}>
+              <form className="mt-6 space-y-4 text-small" onSubmit={handleSave}>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Nom</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Nom</label>
                   <input
                     value={formName}
                     onChange={(event) => setFormName(event.target.value)}
-                    className="mt-1 w-full rounded px-3 py-2 text-xs bg-transparent"
+                    className="mt-1 w-full rounded px-3 py-2 text-small bg-transparent"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Email</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Email</label>
                   <input
                     type="email"
                     value={formEmail}
                     onChange={(event) => setFormEmail(event.target.value)}
-                    className="mt-1 w-full rounded px-3 py-2 text-xs bg-transparent"
+                    className="mt-1 w-full rounded px-3 py-2 text-small bg-transparent"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
                   />
                 </div>
                 <div>
-                  <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>Specialite</label>
+                  <label className="text-stag" style={{ color: 'var(--text-sub)' }}>Specialite</label>
                   <select
                     value={formTechStack}
                     onChange={(event) => setFormTechStack(event.target.value)}
-                    className="mt-1 w-full rounded px-3 py-2 text-xs bg-transparent"
+                    className="mt-1 w-full rounded px-3 py-2 text-small bg-transparent"
                     style={{ background: 'var(--surface)', border: '1px solid var(--border-col)', color: 'var(--text-main)', colorScheme: 'dark' }}
                   >
                     <option value="Frontend" className="bg-neutral-900 text-white">Frontend (React, Vue)</option>
@@ -302,8 +302,8 @@ export default function Dashboard() {
           <div className="mt-10 rounded-lg p-6" style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="font-display text-lg" style={{ color: 'var(--text-main)' }}>Mes projets</h2>
-                <p className="mt-1 text-[11px]" style={{ color: 'var(--text-sub)' }}>
+                <h2 className="text-h3" style={{ color: 'var(--text-main)' }}>Mes projets</h2>
+                <p className="mt-1 text-small" style={{ color: 'var(--text-sub)' }}>
                   Suivi des projets associes a votre profil.
                 </p>
               </div>
@@ -314,7 +314,7 @@ export default function Dashboard() {
             </div>
 
             {myProjects.length === 0 ? (
-              <div className="mt-6 rounded-md px-4 py-3 text-xs" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
+              <div className="mt-6 rounded-md px-4 py-3 text-small" style={{ background: 'var(--surface)', color: 'var(--text-sub)' }}>
                 Aucun projet lie a votre compte pour le moment.
               </div>
             ) : (
@@ -323,7 +323,7 @@ export default function Dashboard() {
                   <div key={project.id} className="rounded-lg p-4" style={{ background: 'var(--surface)', border: '1px solid var(--border-col)' }}>
                     <div className="flex items-center justify-between gap-3">
                       <div>
-                        <div className="text-xs font-semibold" style={{ color: 'var(--text-main)' }}>{project.title}</div>
+                        <div className="text-small font-semibold" style={{ color: 'var(--text-main)' }}>{project.title}</div>
                         <div className="text-[10px] mt-1" style={{ color: 'var(--text-sub)' }}>{project.category} · {project.status}</div>
                       </div>
                       <span className="rounded-full px-2.5 py-1 text-[9px] font-semibold"
@@ -331,7 +331,7 @@ export default function Dashboard() {
                         {project.techStack.slice(0, 2).join(' / ')}
                       </span>
                     </div>
-                    <p className="mt-3 text-xs" style={{ color: 'var(--text-sub)' }}>{project.summary}</p>
+                    <p className="mt-3 text-small" style={{ color: 'var(--text-sub)' }}>{project.summary}</p>
                     <div className="mt-3 flex items-center gap-3">
                       <Link to={`/projects/${project.id}?edit=1`} className="text-[10px] font-bold uppercase tracking-wider"
                         style={{ color: 'var(--accent-orange)' }}>

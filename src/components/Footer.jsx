@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
@@ -35,7 +36,7 @@ export default function Footer() {
             <span className="text-xl font-display tracking-wider" style={{ color: 'var(--text-main)' }}>
               Dev<span style={{ color: 'var(--accent-orange)' }}>Bénin</span>
             </span>
-            <p className="mt-4 max-w-sm text-xs leading-relaxed font-light" style={{ color: 'var(--text-sub)' }}>
+            <p className="mt-4 max-w-sm text-small leading-relaxed font-light" style={{ color: 'var(--text-sub)' }}>
               La communauté nationale des créateurs, développeurs et professionnels du numérique au Bénin.
               Rejoignez-nous pour grandir ensemble.
             </p>
@@ -89,13 +90,13 @@ export default function Footer() {
           {/* Navigation links */}
           <div>
             <h4
-              className="text-[10px] font-bold uppercase tracking-widest mb-4"
+              className="text-stag mb-4"
               style={{ color: 'var(--accent-orange)' }}
             >
               Navigation
             </h4>
-            <ul className="space-y-2.5 text-xs font-medium" style={{ color: 'var(--text-sub)' }}>
-              {['Accueil:#home', 'À Propos:#about', 'Services:#features', 'Challenges:#challenges'].map(item => {
+            <ul className="space-y-2.5 text-small font-medium" style={{ color: 'var(--text-sub)' }}>
+              {['Accueil:#home', 'À Propos:#about', 'Projets:#home-projects', 'Challenges:#challenges'].map(item => {
                 const [label, href] = item.split(':');
                 return (
                   <li key={href}>
@@ -116,24 +117,36 @@ export default function Footer() {
           {/* Community links */}
           <div>
             <h4
-              className="text-[10px] font-bold uppercase tracking-widest mb-4"
+              className="text-stag mb-4"
               style={{ color: 'var(--accent-orange)' }}
             >
               Communauté
             </h4>
-            <ul className="space-y-2.5 text-xs font-medium" style={{ color: 'var(--text-sub)' }}>
-              {['Membres:#community', 'Blog Technique:#blog', 'Projets Locaux:#', 'Leaderboard:#'].map(item => {
+            <ul className="space-y-2.5 text-small font-medium" style={{ color: 'var(--text-sub)' }}>
+              {['Membres:/membres', 'Blog Technique:#blog', 'Projets Locaux:/projects', 'Leaderboard:#leaderboard'].map(item => {
                 const [label, href] = item.split(':');
+                const isSpa = href.startsWith('/');
                 return (
                   <li key={label}>
-                    <a
-                      href={href}
-                      className="transition-colors duration-150"
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
-                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-sub)'}
-                    >
-                      {label}
-                    </a>
+                    {isSpa ? (
+                      <Link
+                        to={href}
+                        className="transition-colors duration-150"
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-sub)'}
+                      >
+                        {label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={href}
+                        className="transition-colors duration-150"
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-sub)'}
+                      >
+                        {label}
+                      </a>
+                    )}
                   </li>
                 );
               })}

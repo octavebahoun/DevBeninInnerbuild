@@ -9,6 +9,7 @@ import Articles from './pages/Articles';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
+import Membres from './pages/Membres';
 import { ThemeProvider } from './context/ThemeContext';
 import { authStore } from './lib/storage';
 
@@ -37,6 +38,7 @@ export default function App() {
               <Route path="/articles" element={<Articles />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/projects/:projectId" element={<ProjectDetail />} />
+              <Route path="/membres" element={<Membres />} />
               <Route
                 path="/dashboard"
                 element={

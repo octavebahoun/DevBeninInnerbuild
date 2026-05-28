@@ -22,18 +22,18 @@ export default function ProjectFilters({
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
             placeholder="Rechercher un projet, tag, stack..."
-            className="w-full rounded px-3.5 py-2 pl-9 text-xs focus:outline-none"
+            className="w-full rounded px-3.5 py-2 pl-9 text-small focus:outline-none"
             style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)', color: 'var(--text-main)' }}
           />
         </div>
         <div className="flex items-center gap-3">
-          <label className="text-[10px] uppercase tracking-widest" style={{ color: 'var(--text-sub)' }}>
+          <label className="text-stag" style={{ color: 'var(--text-sub)' }}>
             Trier
           </label>
           <select
             value={sortBy}
             onChange={(event) => onSortChange(event.target.value)}
-            className="rounded px-3 py-2 text-xs"
+            className="rounded px-3 py-2 text-small"
             style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)', color: 'var(--text-main)', colorScheme: 'dark' }}
           >
             <option value="recent" className="bg-neutral-900 text-white">Plus recents</option>
@@ -46,7 +46,7 @@ export default function ProjectFilters({
 
       <div className="space-y-4">
         <div>
-          <div className="text-[10px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-sub)' }}>
+          <div className="text-stag mb-2" style={{ color: 'var(--text-sub)' }}>
             Categories
           </div>
           <div className="flex flex-wrap gap-2">
@@ -76,7 +76,7 @@ export default function ProjectFilters({
         </div>
 
         <div>
-          <div className="text-[10px] uppercase tracking-widest mb-2" style={{ color: 'var(--text-sub)' }}>
+          <div className="text-stag mb-2" style={{ color: 'var(--text-sub)' }}>
             Tech stack
           </div>
           <div className="flex flex-wrap gap-2">
