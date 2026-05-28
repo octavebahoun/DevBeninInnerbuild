@@ -56,6 +56,17 @@ export default function ProjectCard({ project, onLike, isLiked, onShare, shareLa
         )}
       </div>
 
+      {/* Project Cover Image Section */}
+      <div className="relative h-44 overflow-hidden group bg-neutral-950">
+        <img 
+          src={project.image || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80"} 
+          alt={project.title} 
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        {/* Shadow overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-60" />
+      </div>
+
       <div className="p-6 relative">
         {/* Subtle grid accent inside the card body */}
         <div className="absolute right-4 top-4 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity duration-300">
@@ -76,28 +87,20 @@ export default function ProjectCard({ project, onLike, isLiked, onShare, shareLa
         </p>
 
         {/* Project Owner Profile Row */}
-        {project.owner && (
-          <div className="mt-4 flex items-center gap-2.5 py-2 px-3 rounded-xl bg-black/10 border border-white/[0.03]">
-            <img 
-              src={
-                project.owner === 'Oktav Dev' ? 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=256&h=256&q=80' :
-                project.owner === 'Precieux Dev' ? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&h=256&q=80' :
-                project.owner === 'Ronald Hounnou' ? 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=256&h=256&q=80' :
-                project.owner === 'Amina Bello' ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&h=256&q=80' :
-                "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"
-              } 
-              alt={project.owner} 
-              className="w-5.5 h-5.5 rounded-full object-cover border border-white/10"
-            />
-            <div className="flex flex-col">
-              <span className="text-[8px] font-bold uppercase tracking-wider opacity-55" style={{ color: 'var(--text-sub)' }}>Porteur de projet</span>
-              <span className="text-[10px] font-extrabold" style={{ color: 'var(--text-main)' }}>{project.owner}</span>
-            </div>
-            <span className="ml-auto text-[8px] font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/10" style={{ color: 'var(--text-sub)' }}>
-              {project.ownerEmail}
-            </span>
+        <div className="mt-4 flex items-center gap-3 py-2.5 px-3.5 rounded-2xl bg-black/20 border border-white/[0.04]">
+          <img 
+            src={project.ownerAvatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"} 
+            alt={project.owner || 'Porteur'} 
+            className="w-9.5 h-9.5 rounded-xl object-cover border border-white/10"
+          />
+          <div className="flex flex-col">
+            <span className="text-[9px] font-bold uppercase tracking-wider opacity-60" style={{ color: 'var(--accent-orange)' }}>Porteur de projet</span>
+            <span className="text-xs font-black mt-0.5" style={{ color: 'var(--text-main)' }}>{project.owner || 'Membre DevBenin'}</span>
           </div>
-        )}
+          <span className="ml-auto text-[9px] font-mono px-2 py-1 rounded bg-white/5 border border-white/10" style={{ color: 'var(--text-sub)' }}>
+            {project.ownerEmail || 'contact@devbenin.bj'}
+          </span>
+        </div>
 
         {/* Tech tags stack */}
         <div className="mt-4 flex flex-wrap gap-1.5 pt-4" style={{ borderTop: '1px dashed var(--border-col)' }}>

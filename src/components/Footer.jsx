@@ -96,18 +96,30 @@ export default function Footer() {
               Navigation
             </h4>
             <ul className="space-y-2.5 text-small font-medium" style={{ color: 'var(--text-sub)' }}>
-              {['Accueil:#home', 'À Propos:#about', 'Projets:#home-projects', 'Challenges:#challenges'].map(item => {
+              {['Accueil:#home', 'À Propos:#about', 'Projets:#home-projects', 'Challenges:/challenges'].map(item => {
                 const [label, href] = item.split(':');
+                const isSpa = href.startsWith('/');
                 return (
                   <li key={href}>
-                    <a
-                      href={href}
-                      className="transition-colors duration-150"
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
-                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-sub)'}
-                    >
-                      {label}
-                    </a>
+                    {isSpa ? (
+                      <Link
+                        to={href}
+                        className="transition-colors duration-150"
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-sub)'}
+                      >
+                        {label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={href}
+                        className="transition-colors duration-150"
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--accent-orange)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--text-sub)'}
+                      >
+                        {label}
+                      </a>
+                    )}
                   </li>
                 );
               })}
@@ -123,7 +135,7 @@ export default function Footer() {
               Communauté
             </h4>
             <ul className="space-y-2.5 text-small font-medium" style={{ color: 'var(--text-sub)' }}>
-              {['Membres:/membres', 'Blog Technique:#blog', 'Projets Locaux:/projects', 'Leaderboard:#leaderboard'].map(item => {
+              {['Membres:/membres', 'Blog Technique:#blog', 'Projets Locaux:/projects', 'Leaderboard:/leaderboard'].map(item => {
                 const [label, href] = item.split(':');
                 const isSpa = href.startsWith('/');
                 return (

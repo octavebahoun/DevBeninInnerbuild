@@ -1,0 +1,23 @@
+{
+  "quizzes": [
+    {
+      "id": "react-basics",
+      "title": "Bases de React & Hooks",
+      "difficulty": "Facile",
+      "questionsCount": 5,
+      "xpReward": 100
+    },
+    {
+      "id": "advanced-js",
+      "title": "JavaScript Moderne ES6+",
+      "difficulty": "Intermédiaire",
+      "questionsCount": 8,
+      "xpReward": 200
+    }
+  ],
+  "leaderboard": [
+    { "rank": 1, "name": "Precieux Dev", "score": 2400, "quizzesCompleted": 12 },
+    { "rank": 2, "name": "Oktav Dev", "score": 2100, "quizzesCompleted": 10 },
+    { "rank": 3, "name": "Amina Bello", "score": 1950, "quizzesCompleted": 9 }
+  ]
+}

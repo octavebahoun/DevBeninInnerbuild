@@ -1,18 +1,25 @@
 import { readJSON, writeJSON } from './storage';
-import { initialProjects } from '../data/projects';
+import initialProjects from '../data/projects.json';
 
 const PROJECTS_KEY = 'devbenin-projects';
 const LIKES_KEY = 'devbenin-project-likes';
 
 const createId = () => `c_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 
-const normalizeProject = (project) => ({
-  ...project,
-  likes: Number(project.likes) || 0,
-  comments: Array.isArray(project.comments) ? project.comments : [],
-  techStack: Array.isArray(project.techStack) ? project.techStack : [],
-  tags: Array.isArray(project.tags) ? project.tags : [],
-});
+const normalizeProject = (project) => {
+  const seed = initialProjects.find((p) => p.id === project.id);
+  return {
+    ...project,
+    owner: project.owner || seed?.owner || 'Membre DevBenin',
+    ownerEmail: project.ownerEmail || seed?.ownerEmail || 'contact@devbenin.bj',
+    ownerAvatar: project.ownerAvatar || seed?.ownerAvatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80",
+    image: project.image || seed?.image || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80",
+    likes: Number(project.likes) || 0,
+    comments: Array.isArray(project.comments) ? project.comments : [],
+    techStack: Array.isArray(project.techStack) ? project.techStack : [],
+    tags: Array.isArray(project.tags) ? project.tags : [],
+  };
+};
 
 const normalizeList = (list) => list.map(normalizeProject);
 

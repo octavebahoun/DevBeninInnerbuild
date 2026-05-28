@@ -1,5 +1,5 @@
 import { readJSON, writeJSON } from './storage';
-import { initialArticles } from '../data/articles';
+import initialArticles from '../data/articles.json';
 
 const ARTICLES_KEY = 'devbenin-articles';
 const LEGACY_KEY = 'devbenin-blog-counts';
@@ -8,14 +8,21 @@ const LEGACY_LIKES_KEY = 'devbenin-blog-likes';
 
 const createId = () => `a_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
 
-const normalizeArticle = (article) => ({
-  ...article,
-  likes: Number(article.likes) || 0,
-  comments: Number(article.comments) || 0,
-  tags: Array.isArray(article.tags) ? article.tags : [],
-  category: article.category || 'General',
-  readTime: article.readTime || '4 min',
-});
+const normalizeArticle = (article) => {
+  const seed = initialArticles.find((a) => a.id === article.id);
+  return {
+    ...article,
+    likes: Number(article.likes) || 0,
+    comments: Number(article.comments) || 0,
+    views: Number(article.views) || seed?.views || 5,
+    tags: Array.isArray(article.tags) ? article.tags : [],
+    category: article.category || seed?.category || 'General',
+    readTime: article.readTime || '4 min',
+    image: article.image || seed?.image || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=300&q=80',
+    date: article.date || seed?.date || 'il y a 2h',
+    content: article.content || seed?.content || article.preview || '',
+  };
+};
 
 const normalizeList = (list) => list.map(normalizeArticle);
 
@@ -89,12 +96,16 @@ export const articleStore = {
     const category = payload.category?.trim() || 'General';
     const tags = Array.isArray(payload.tags) ? payload.tags : [];
     const readTime = payload.readTime?.trim() || '4 min';
+    const content = payload.content?.trim() || preview;
+    const image = payload.image?.trim() || '';
     const date = new Date().toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
 
     const newArticle = normalizeArticle({
       id: createId(),
       title,
       preview,
+      content,
+      image,
       author,
       date,
       readTime,
@@ -108,5 +119,15 @@ export const articleStore = {
     const nextArticles = [newArticle, ...articles];
     this.saveArticles(nextArticles);
     return { ok: true, articles: nextArticles, article: newArticle };
+  },
+  getArticleById(id) {
+    const articles = this.getArticles();
+    const art = articles.find((a) => a.id === id);
+    if (art) {
+      // Dynamic views incrementation on load
+      art.views = (art.views || 0) + 1;
+      this.saveArticles(articles);
+    }
+    return art || null;
   },
 };

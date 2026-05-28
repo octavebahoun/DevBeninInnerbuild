@@ -40,8 +40,8 @@ const NAV_LINKS = [
   {
     label: 'Ressources',
     children: [
-      { label: 'Challenges',  href: '#challenges',  icon: <Trophy    className="h-3.5 w-3.5" /> },
-      { label: 'Classement',  href: '#leaderboard', icon: <BarChart2 className="h-3.5 w-3.5" /> },
+      { label: 'Challenges',  href: '/challenges',  icon: <Trophy    className="h-3.5 w-3.5" /> },
+      { label: 'Classement',  href: '/leaderboard', icon: <BarChart2 className="h-3.5 w-3.5" /> },
     ],
   },
 ];

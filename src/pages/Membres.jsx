@@ -2,116 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, GraduationCap, Globe, Sparkles, Filter, Award, ChevronLeft, ChevronRight, X, ArrowUpRight, ShieldCheck, Mail } from 'lucide-react';
 import { ScrollReveal } from '../components/ScrollReveal';
-
-// Mock Members Database
-const MOCK_MEMBERS = [
-  {
-    id: 1,
-    name: "CHOKKI MIKE @Ekim's",
-    role: "Lead Cloud Architect & Senior Mentor",
-    exp: 7,
-    bio: "Passionné par l'architecture cloud et le DevOps. Forme la prochaine génération de leaders tech au Bénin.",
-    skills: ["AWS", "Terraform", "Docker", "Kubernetes", "DevOps"],
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com", website: "https://ekim.dev" },
-    mentor: true,
-    email: "mike@devbenin.bj",
-    projects: "Kubernetes Zero-Downtime Pipeline"
-  },
-  {
-    id: 2,
-    name: "AFOMASSE Théophas",
-    role: "Fullstack Developer",
-    exp: 2,
-    bio: "Développeur React & Django. Curieux d'apprendre et passionné par le clean code et l'automatisation.",
-    skills: ["React", "Django", "TailwindCSS", "PostgreSQL"],
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com" },
-    mentor: false,
-    email: "theophas@devbenin.bj",
-    projects: "Benin AgriTech Dashboard"
-  },
-  {
-    id: 3,
-    name: "Jules-christ GBASSI",
-    role: "UI/UX Designer & Frontend Dev",
-    exp: 5,
-    bio: "Développeur passionné par le web et les technologies modernes. J'aime créer des interfaces qui allient design d'exception et performance.",
-    skills: ["Figma", "Next.js", "GSAP", "TailwindCSS", "UI/UX"],
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com", website: "https://gbassi.design" },
-    mentor: false,
-    email: "jules@devbenin.bj",
-    projects: "Benin Cinema Showcase"
-  },
-  {
-    id: 4,
-    name: "AMEGANVI Kodjo Jean-Gaël",
-    role: "Software Architect & Web3 Builder",
-    exp: 5,
-    bio: "I am a passionate full-stack developer and software architect. I build decentralized applications, Solidity smart contracts and solid web services.",
-    skills: ["Solidity", "Rust", "Node.js", "Go", "Web3"],
-    avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com" },
-    mentor: true,
-    email: "kodjo@devbenin.bj",
-    projects: "TontineChain DeFi Protocol"
-  },
-  {
-    id: 5,
-    name: "Amina BELLO",
-    role: "Backend Python Engineer",
-    exp: 4,
-    bio: "Spécialiste de la conception d'APIs robustes et performantes avec Django et FastAPIs. Partisane du TDD.",
-    skills: ["Python", "FastAPI", "Django", "Docker", "Redis"],
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com" },
-    mentor: false,
-    email: "amina@devbenin.bj",
-    projects: "E-Commerce Gateway API"
-  },
-  {
-    id: 6,
-    name: "Oktav Dev",
-    role: "AI Engineer & Fullstack JS",
-    exp: 6,
-    bio: "Ingénieur IA et expert JavaScript. Développe des agents autonomes et des applications à forte valeur ajoutée technologique.",
-    skills: ["TypeScript", "Node.js", "LangChain", "OpenAI", "React"],
-    avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com" },
-    mentor: true,
-    email: "oktav@devbenin.bj",
-    projects: "BeninVoice AI Assistant"
-  },
-  {
-    id: 7,
-    name: "Precieux Dev",
-    role: "Senior Frontend Architect",
-    exp: 8,
-    bio: "Expert React, GSAP et animations 3D complexes. Pair-programmateur et amoureux du design d'exception.",
-    skills: ["React", "GSAP", "Three.js", "Tailwind v4", "CSS"],
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com", website: "https://precieux.dev" },
-    mentor: true,
-    email: "precieux@devbenin.bj",
-    projects: "DevBenin UI Rebranding"
-  },
-  {
-    id: 8,
-    name: "Ronald Hounnou",
-    role: "Creative Frontend Developer",
-    exp: 3,
-    bio: "Créatif passionné d'animations CSS, d'expériences WebGL uniques et de design immersif.",
-    skills: ["WebGL", "Three.js", "React", "GSAP"],
-    avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=256&h=256&q=80",
-    links: { github: "https://github.com", linkedin: "https://linkedin.com" },
-    mentor: false,
-    email: "ronald@devbenin.bj",
-    projects: "3D Interactive Benin Map"
-  }
-];
+import { memberStore } from '../lib/memberStore';
 
 export default function Membres() {
+  const [members] = useState(() => memberStore.getMembers());
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('Tous'); // 'Tous', 'Junior', 'Intermediaire', 'Senior', 'Mentors'
   const [selectedMember, setSelectedMember] = useState(null);
@@ -120,7 +14,7 @@ export default function Membres() {
 
   // Filter members based on search and selected tab filter
   const filteredMembers = useMemo(() => {
-    return MOCK_MEMBERS.filter(member => {
+    return members.filter(member => {
       // 1. Search filter
       const matchesSearch = 
         member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||

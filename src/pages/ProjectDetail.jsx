@@ -88,7 +88,16 @@ export default function ProjectDetail() {
             </button>
           </div>
 
-          <p className="mt-4 text-body leading-relaxed" style={{ color: 'var(--text-sub)' }}>
+          {/* Project Cover Visual Image inside details */}
+          <div className="mt-6 rounded-2xl overflow-hidden h-80 border border-white/[0.04] bg-neutral-950">
+            <img 
+              src={project.image || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80"} 
+              alt={project.title} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          <p className="mt-6 text-body leading-relaxed" style={{ color: 'var(--text-sub)' }}>
             {project.description}
           </p>
 
@@ -144,24 +153,18 @@ export default function ProjectDetail() {
 
           <div>
             {/* Owner Profile Card */}
-            {project.owner && (
+            {(project.owner || project.ownerAvatar) && (
               <div className="rounded-2xl p-6 mb-6" style={{ background: 'var(--card-bg)', border: '1px solid var(--border-col)' }}>
-                <span className="text-[8px] font-bold uppercase tracking-widest text-[var(--accent-orange)] block mb-4">Porteur du projet</span>
+                <span className="text-[10px] font-black uppercase tracking-widest text-[var(--accent-orange)] block mb-4">Porteur du projet</span>
                 <div className="flex items-center gap-4">
                   <img 
-                    src={
-                      project.owner === 'Oktav Dev' ? 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=256&h=256&q=80' :
-                      project.owner === 'Precieux Dev' ? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=256&h=256&q=80' :
-                      project.owner === 'Ronald Hounnou' ? 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=256&h=256&q=80' :
-                      project.owner === 'Amina Bello' ? 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=256&h=256&q=80' :
-                      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"
-                    } 
-                    alt={project.owner} 
-                    className="w-12 h-12 rounded-xl object-cover border border-white/10"
+                    src={project.ownerAvatar || "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80"} 
+                    alt={project.owner || 'Porteur'} 
+                    className="w-16 h-16 rounded-2xl object-cover border border-white/10"
                   />
                   <div>
-                    <div className="text-body font-black" style={{ color: 'var(--text-main)' }}>{project.owner}</div>
-                    <div className="text-[10px] font-mono mt-0.5" style={{ color: 'var(--text-sub)' }}>{project.ownerEmail}</div>
+                    <div className="text-lg font-black" style={{ color: 'var(--text-main)' }}>{project.owner || 'Membre DevBenin'}</div>
+                    <div className="text-small font-mono mt-1 opacity-70" style={{ color: 'var(--text-sub)' }}>{project.ownerEmail || 'contact@devbenin.bj'}</div>
                   </div>
                 </div>
               </div>

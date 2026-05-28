@@ -1,0 +1,20 @@
+[
+  {
+    "id": "innerbuild-s02",
+    "title": "InnerBuild S02 - Refonte DevBenin",
+    "status": "Ongoing",
+    "difficulty": "Hard",
+    "points": 500,
+    "description": "Recréer l'intégralité du frontend de devbenin.bj avec une architecture moderne, fluide et créative.",
+    "endDate": "2026-06-15"
+  },
+  {
+    "id": "web3-tontine",
+    "title": "Tontine DeFi Smart Contract",
+    "status": "Completed",
+    "difficulty": "Medium",
+    "points": 350,
+    "description": "Concevoir un contrat intelligent Solidity optimisé pour gérer les contributions et tirages de tontines locales.",
+    "endDate": "2026-05-10"
+  }
+]
